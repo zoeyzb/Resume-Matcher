@@ -6,6 +6,7 @@ import { SortableContext, verticalListSortingStrategy } from '@dnd-kit/sortable'
 import { useTranslations } from '@/lib/i18n';
 import type { Application, ApplicationStatus } from '@/lib/api/tracker';
 import { ApplicationCard } from './application-card';
+import { cn } from '@/lib/utils';
 
 interface KanbanColumnProps {
   status: ApplicationStatus;
@@ -30,12 +31,12 @@ export function KanbanColumn({
   const { setNodeRef, isOver } = useDroppable({ id: `column:${status}` });
 
   return (
-    <div className="flex h-full w-80 shrink-0 flex-col p-3">
-      <div className="mb-2 flex items-center justify-between border-b-2 border-black pb-1">
-        <h2 className="font-mono text-xs font-bold uppercase tracking-wide text-ink">
-          {t(`tracker.columns.${status}`)}
-        </h2>
-        <span className="font-mono text-xs text-steel-grey">{applications.length}</span>
+    <div className="flex h-full w-72 shrink-0 flex-col p-3 sm:w-80">
+      <div className="mb-2 flex items-center justify-between px-1 pb-2">
+        <h2 className="text-sm font-semibold text-ink">{t(`tracker.columns.${status}`)}</h2>
+        <span className="rounded-full bg-paper-tint px-2 py-0.5 text-xs font-medium text-steel-grey">
+          {applications.length}
+        </span>
       </div>
 
       <SortableContext
@@ -44,10 +45,13 @@ export function KanbanColumn({
       >
         <div
           ref={setNodeRef}
-          className={`flex min-h-0 flex-1 flex-col gap-2 overflow-y-auto p-1 ${isOver ? 'bg-paper-tint' : ''}`}
+          className={cn(
+            'flex min-h-0 flex-1 flex-col gap-2 overflow-y-auto rounded-xl p-1 transition-colors duration-150 motion-reduce:transition-none',
+            isOver && 'bg-indigo-50/60'
+          )}
         >
           {applications.length === 0 ? (
-            <p className="px-2 py-6 text-center font-mono text-xs text-steel-grey">
+            <p className="rounded-xl border border-dashed border-slate-200 px-2 py-6 text-center text-xs text-steel-grey">
               {t('tracker.columns.empty')}
             </p>
           ) : (

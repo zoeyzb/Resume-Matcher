@@ -45,7 +45,10 @@
     "settings": "Paramètres",
     "backToDashboard": "Retour au tableau de bord",
     "goToSettings": "Accéder aux paramètres",
-    "applicationTracker": "Suivi des candidatures"
+    "applicationTracker": "Suivi des candidatures",
+    "tracker": "Suivi",
+    "openMenu": "Ouvrir le menu",
+    "closeMenu": "Fermer le menu"
   },
   "dashboard": {
     "title": "Tableau de bord",
@@ -176,7 +179,8 @@
       "resume": "CV",
       "coverLetter": "LETTRE DE MOTIVATION",
       "outreach": "MESSAGE DE CONTACT",
-      "jdMatch": "CORRESPONDANCE FP"
+      "jdMatch": "CORRESPONDANCE FP",
+      "interviewPrep": "PRÉPARATION À L’ENTRETIEN"
     },
     "footer": {
       "moduleLabel": "Module Créateur de CV",
@@ -195,7 +199,9 @@
       "outreachDescription": "Générez un message de prise de contact concis pour LinkedIn ou e-mail basé sur votre CV et la fiche de poste.",
       "generateButton": "Générer {title}",
       "coverLetterFooter": "Conseil : personnalisez d'abord pour de meilleurs résultats.",
-      "outreachFooter": "Conseil : restez bref et personnalisé."
+      "outreachFooter": "Conseil : restez bref et personnalisé.",
+      "interviewPrepDescription": "Générez une préparation à l'entretien spécifique au poste, basée sur votre CV personnalisé et la fiche de poste.",
+      "interviewPrepFooter": "Conseil : utilisez ceci après avoir personnalisé votre CV pour préparer des réponses sincères et ancrées dans votre CV."
     },
     "regenerateDialog": {
       "title": "Régénérer {title} ?",
@@ -444,7 +450,8 @@
       "editorPanel": "Panneau d'édition",
       "coverLetterEditor": "Éditeur de lettre de motivation",
       "outreachEditor": "Éditeur de message de contact",
-      "jdMatchAnalysis": "Analyse de correspondance FP"
+      "jdMatchAnalysis": "Analyse de correspondance FP",
+      "interviewPrep": "Préparation à l'entretien"
     },
     "alerts": {
       "saveNotAvailable": "L'enregistrement n'est disponible que lors de la modification d'un CV existant.",
@@ -461,7 +468,8 @@
       "coverLetterDownloadFailed": "Impossible de télécharger la lettre de motivation : {error}",
       "outreachSaveFailed": "Impossible d'enregistrer le message de contact. Veuillez réessayer.",
       "coverLetterGenerateFailed": "Impossible de générer la lettre de motivation : {error}",
-      "outreachGenerateFailed": "Impossible de générer le message de contact : {error}"
+      "outreachGenerateFailed": "Impossible de générer le message de contact : {error}",
+      "interviewPrepGenerateFailed": "Impossible de générer la préparation à l'entretien : {error}"
     }
   },
   "enrichment": {
@@ -658,6 +666,7 @@
       "apiKeyNotRequiredPlaceholder": "Non requise pour les modèles locaux",
       "apiKeyOptionalPlaceholder": "Laissez vide si votre serveur n'a pas d'authentification",
       "leaveBlankToKeepExistingKey": "LAISSER VIDE POUR CONSERVER LA CLÉ EXISTANTE",
+      "advancedSettingsLabel": "Paramètres avancés",
       "baseUrlLabel": "URL de base (optionnelle)",
       "baseUrlPlaceholder": "ex. https://api.openai.com/v1",
       "baseUrlDescription": "Remplacez l'URL de base de l'API pour utiliser un proxy/agrégateur. Laissez vide pour utiliser la valeur par défaut du fournisseur.",
@@ -701,6 +710,10 @@
       "outreachMessage": {
         "label": "Message de prospection à froid",
         "description": "Générez un message de networking pour LinkedIn ou e-mail"
+      },
+      "interviewPrep": {
+        "label": "Préparation à l'entretien",
+        "description": "Générez automatiquement une préparation à l'entretien avec les CV personnalisés enregistrés"
       },
       "customPromptLabel": "Invite personnalisée (optionnelle)",
       "customPromptHelp": "Doit inclure ces espaces réservés (chacun entre accolades) : job_description, resume_data, output_language. Laissez vide pour utiliser l'invite par défaut.",
@@ -1005,6 +1018,25 @@
       "loadFailed": "Impossible de charger les candidatures.",
       "moveFailed": "Impossible de déplacer la candidature.",
       "deleteFailed": "Impossible de supprimer la ou les candidatures."
+    }
+  },
+  "interviewPrep": {
+    "title": "Préparation à l'entretien",
+    "regenerate": "Régénérer",
+    "unavailableTitle": "Préparation à l'entretien non disponible",
+    "loadingContextDescription": "Vérification du contexte du poste pour ce CV adapté avant la génération.",
+    "missingContextDescription": "Ce CV adapté ne dispose pas du contexte de poste enregistré nécessaire pour générer la préparation à l'entretien. Adaptez à nouveau le CV avec une fiche de poste pour utiliser cette fonctionnalité.",
+    "saveRequiredDescription": "Enregistrez ce CV adapté avant de générer la préparation à l'entretien.",
+    "focusArea": "Domaine d'attention",
+    "suggestedAnswerPoints": "Points de réponse suggérés",
+    "whyItMatters": "Pourquoi c'est important",
+    "preparationSuggestion": "Suggestion de préparation",
+    "sections": {
+      "roleFit": "Analyse d'adéquation au poste",
+      "resumeQuestions": "Questions basées sur le CV",
+      "projectFollowUps": "Questions de suivi sur les projets",
+      "skillGaps": "Lacunes de compétences",
+      "talkingPoints": "Points clés à aborder"
     }
   }
 }

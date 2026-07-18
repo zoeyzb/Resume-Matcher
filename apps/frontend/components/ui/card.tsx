@@ -8,29 +8,23 @@ interface CardProps extends React.HTMLAttributes<HTMLDivElement> {
 
 const Card = React.forwardRef<HTMLDivElement, CardProps>(
   ({ className, variant = 'default', noPadding = false, ...props }, ref) => {
-    const baseStyles = 'rounded-none flex flex-col relative overflow-hidden';
+    const baseStyles = 'rounded-xl flex flex-col relative bg-white border border-border';
 
     const variants = {
-      default: 'bg-canvas',
+      default: 'shadow-sw-xs',
       interactive: cn(
-        'bg-canvas border-2 border-transparent', // Initial state
-        'transition-all duration-200 ease-in-out',
-        'cursor-pointer group',
-        'hover:z-20 hover:border-ink hover:shadow-sw-default hover:-translate-y-[2px] hover:-translate-x-[2px]'
+        'shadow-sw-xs cursor-pointer group',
+        'transition-[transform,box-shadow,border-color] duration-150 ease-out motion-reduce:transition-none',
+        'hover:shadow-sw-card hover:border-slate-300 hover:-translate-y-0.5 motion-reduce:hover:translate-y-0'
       ),
-      outline: 'bg-canvas border-2 border-ink',
+      outline: 'shadow-none',
       ghost: 'bg-transparent border-none shadow-none',
     };
-
-    // Dashboard specific style that was common:
-    // border-2 border-dashed border-amber-500 bg-amber-50
-    // We can handle specific overrides via className, but the base interactive card
-    // in dashboard had: bg-background (canvas)
 
     return (
       <div
         ref={ref}
-        className={cn(baseStyles, variants[variant], !noPadding && 'p-6 md:p-8', className)}
+        className={cn(baseStyles, variants[variant], !noPadding && 'p-6', className)}
         {...props}
       />
     );
@@ -40,7 +34,7 @@ Card.displayName = 'Card';
 
 const CardHeader = React.forwardRef<HTMLDivElement, React.HTMLAttributes<HTMLDivElement>>(
   ({ className, ...props }, ref) => (
-    <div ref={ref} className={cn('flex flex-col space-y-1.5 mb-4', className)} {...props} />
+    <div ref={ref} className={cn('flex flex-col space-y-1 mb-4', className)} {...props} />
   )
 );
 CardHeader.displayName = 'CardHeader';
@@ -49,7 +43,7 @@ const CardTitle = React.forwardRef<HTMLHeadingElement, React.HTMLAttributes<HTML
   ({ className, ...props }, ref) => (
     <h3
       ref={ref}
-      className={cn('font-serif text-2xl font-semibold leading-none tracking-tight', className)}
+      className={cn('font-semibold text-lg leading-snug tracking-tight text-ink', className)}
       {...props}
     />
   )
@@ -60,7 +54,7 @@ const CardDescription = React.forwardRef<
   HTMLParagraphElement,
   React.HTMLAttributes<HTMLParagraphElement>
 >(({ className, ...props }, ref) => (
-  <p ref={ref} className={cn('text-sm text-steel-grey font-mono', className)} {...props} />
+  <p ref={ref} className={cn('text-sm text-steel-grey leading-relaxed', className)} {...props} />
 ));
 CardDescription.displayName = 'CardDescription';
 

@@ -6,8 +6,10 @@ import { CSS } from '@dnd-kit/utilities';
 import GripVertical from 'lucide-react/dist/esm/icons/grip-vertical';
 import Layers from 'lucide-react/dist/esm/icons/layers';
 import { Card } from '@/components/ui/card';
+import { Badge } from '@/components/ui/badge';
 import { useTranslations } from '@/lib/i18n';
 import type { Application } from '@/lib/api/tracker';
+import { cn } from '@/lib/utils';
 
 interface ApplicationCardProps {
   application: Application;
@@ -43,7 +45,7 @@ export function ApplicationCard({
       <Card
         variant="interactive"
         noPadding
-        className={`p-3 ${selected ? 'ring-2 ring-primary' : ''}`}
+        className={cn('p-3', selected && 'ring-2 ring-primary ring-offset-1')}
       >
         <div className="flex items-start gap-2">
           <input
@@ -52,31 +54,33 @@ export function ApplicationCard({
             onChange={() => onToggleSelect(application.application_id)}
             onClick={(e) => e.stopPropagation()}
             aria-label={t('tracker.card.selectAria')}
-            className="mt-1 h-4 w-4 shrink-0 rounded-none border-black accent-primary"
+            className="mt-1 h-4 w-4 shrink-0 rounded border-slate-300 accent-primary"
           />
 
           <button
             type="button"
             onClick={() => onOpen(application.application_id)}
-            className="min-w-0 flex-1 text-left"
+            className="min-w-0 flex-1 cursor-pointer text-left"
           >
             <p className="truncate text-sm font-semibold text-ink">
               {company || t('tracker.card.companyUnknown')}
             </p>
-            <p className="truncate font-mono text-xs text-ink-soft">
+            <p className="truncate text-xs text-steel-grey">
               {role || t('tracker.card.roleUnknown')}
             </p>
-            {application.applied_at && (
-              <p className="mt-1 font-mono text-[10px] uppercase tracking-wide text-steel-grey">
-                {new Date(application.applied_at).toLocaleDateString()}
-              </p>
-            )}
-            {sharedResume && (
-              <span className="mt-1 inline-flex items-center gap-1 border border-black bg-paper-tint px-1 font-mono text-[10px] uppercase text-ink-soft">
-                <Layers className="h-3 w-3" />
-                {t('tracker.card.sharedResume')}
-              </span>
-            )}
+            <div className="mt-1.5 flex flex-wrap items-center gap-1.5">
+              {application.applied_at && (
+                <span className="text-[11px] text-steel-grey">
+                  {new Date(application.applied_at).toLocaleDateString()}
+                </span>
+              )}
+              {sharedResume && (
+                <Badge variant="neutral" className="gap-1 px-1.5 py-0.5">
+                  <Layers className="h-3 w-3" />
+                  {t('tracker.card.sharedResume')}
+                </Badge>
+              )}
+            </div>
           </button>
 
           <button

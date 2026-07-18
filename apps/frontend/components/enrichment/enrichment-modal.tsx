@@ -113,23 +113,24 @@ export function EnrichmentModal({ resumeId, isOpen, onClose, onComplete }: Enric
       onCancel={handleCancel}
     >
       {/* Backdrop */}
-      <div className="absolute inset-0 bg-black/40" />
+      <div className="absolute inset-0 bg-slate-900/50" />
 
       {/* Modal container - 80% viewport with padding */}
       <div className="absolute inset-0 flex items-center justify-center p-5 sm:p-10">
-        <div className="relative w-full h-full max-w-[1200px] bg-white border-2 border-black shadow-sw-lg flex flex-col overflow-hidden">
+        <div className="relative flex h-full w-full max-w-[1200px] flex-col overflow-hidden rounded-2xl border border-border bg-white shadow-sw-xl">
           {/* Header */}
-          <div className="flex items-center justify-between px-6 py-4 border-b-2 border-black bg-paper-tint">
-            <div className="flex items-center gap-3">
-              <Sparkles className="w-5 h-5" />
-              <h1 className="font-mono text-lg font-bold uppercase tracking-wider">
-                {t('enrichment.title')}
-              </h1>
+          <div className="flex items-center justify-between border-b border-border px-6 py-4">
+            <div className="flex items-center gap-2.5">
+              <Sparkles className="w-4 h-4 text-primary" />
+              <h1 className="text-base font-semibold text-ink">{t('enrichment.title')}</h1>
             </div>
             {/* Only show close button in non-loading states */}
             {!['analyzing', 'generating', 'applying'].includes(state.step) && (
-              <button onClick={handleClose} className="p-1 hover:bg-paper-tint transition-colors">
-                <XIcon className="w-5 h-5" />
+              <button
+                onClick={handleClose}
+                className="flex h-8 w-8 cursor-pointer items-center justify-center rounded-lg text-steel-grey transition-colors duration-150 hover:bg-paper-tint hover:text-ink motion-reduce:transition-none"
+              >
+                <XIcon className="w-4 h-4" />
                 <span className="sr-only">{t('common.close')}</span>
               </button>
             )}

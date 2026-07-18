@@ -7,13 +7,9 @@ import { cn } from '@/lib/utils';
 import { useTranslations } from '@/lib/i18n';
 
 /**
- * Swiss International Style Dialog Component
- *
- * Native implementation without external dependencies.
- * - Square corners (rounded-none) - Brutalist aesthetic
- * - Black borders and hard shadows
- * - Canvas background (#F0F0E8)
- * - WCAG 2.2 AA: role="dialog", aria-modal, aria-labelledby wired to title
+ * Premium product dialog. Native implementation without external deps.
+ * Rounded surface, soft elevated shadow, dark scrim (no blur).
+ * WCAG 2.2 AA: role="dialog", aria-modal, aria-labelledby wired to title.
  */
 
 interface DialogContextValue {
@@ -39,7 +35,6 @@ interface DialogProps {
 }
 
 const Dialog: React.FC<DialogProps> = ({ open, onOpenChange, children }) => {
-  // Stable id per dialog instance for aria-labelledby wiring to DialogTitle.
   const titleId = React.useId();
   return (
     <DialogContext.Provider value={{ open, onOpenChange, titleId }}>
@@ -106,7 +101,6 @@ const DialogContent: React.FC<DialogContentProps> = ({ children, className }) =>
   const { open, onOpenChange, titleId } = useDialogContext();
   const { t } = useTranslations();
 
-  // Handle escape key
   React.useEffect(() => {
     const handleEscape = (e: KeyboardEvent) => {
       if (e.key === 'Escape' && open) {
@@ -118,7 +112,6 @@ const DialogContent: React.FC<DialogContentProps> = ({ children, className }) =>
     return () => document.removeEventListener('keydown', handleEscape);
   }, [open, onOpenChange]);
 
-  // Prevent body scroll when dialog is open
   React.useEffect(() => {
     if (open) {
       document.body.style.overflow = 'hidden';
@@ -136,7 +129,7 @@ const DialogContent: React.FC<DialogContentProps> = ({ children, className }) =>
     <div className="fixed inset-0 z-50">
       {/* Overlay */}
       <div
-        className="fixed inset-0 bg-black/50 animate-in fade-in-0"
+        className="fixed inset-0 bg-slate-900/50 animate-in fade-in-0 motion-reduce:animate-none"
         onClick={() => onOpenChange(false)}
       />
       {/* Content */}
@@ -147,9 +140,8 @@ const DialogContent: React.FC<DialogContentProps> = ({ children, className }) =>
           aria-labelledby={titleId}
           className={cn(
             'relative w-full max-w-lg',
-            'border border-black bg-background shadow-sw-lg',
-            'rounded-none',
-            'animate-in fade-in-0 zoom-in-95 duration-200',
+            'rounded-2xl border border-border bg-white shadow-sw-xl',
+            'animate-in fade-in-0 zoom-in-95 duration-200 motion-reduce:animate-none',
             className
           )}
           onClick={(e) => e.stopPropagation()}
@@ -157,9 +149,9 @@ const DialogContent: React.FC<DialogContentProps> = ({ children, className }) =>
           {children}
           <button
             onClick={() => onOpenChange(false)}
-            className="absolute right-4 top-4 opacity-70 transition-opacity hover:opacity-100 focus:outline-none focus:ring-2 focus:ring-blue-700 focus:ring-offset-2"
+            className="absolute right-4 top-4 flex h-8 w-8 items-center justify-center rounded-lg text-steel-grey transition-colors duration-150 hover:bg-paper-tint hover:text-ink motion-reduce:transition-none focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary focus-visible:ring-offset-2"
           >
-            <X className="h-5 w-5" />
+            <X className="h-4 w-4" />
             <span className="sr-only">{t('common.close')}</span>
           </button>
         </div>
@@ -204,7 +196,7 @@ const DialogTitle: React.FC<DialogTitleProps> = ({ className, children, ...props
   return (
     <h2
       id={titleId}
-      className={cn('font-serif text-lg font-bold leading-none tracking-tight', className)}
+      className={cn('text-lg font-semibold leading-snug tracking-tight text-ink', className)}
       {...props}
     >
       {children}
@@ -218,7 +210,7 @@ interface DialogDescriptionProps {
 }
 
 const DialogDescription: React.FC<DialogDescriptionProps> = ({ className, children, ...props }) => (
-  <p className={cn('text-sm text-ink-soft', className)} {...props}>
+  <p className={cn('text-sm text-steel-grey leading-relaxed', className)} {...props}>
     {children}
   </p>
 );

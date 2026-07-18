@@ -15,7 +15,11 @@ import Plus from 'lucide-react/dist/esm/icons/plus';
 import Loader2 from 'lucide-react/dist/esm/icons/loader-2';
 import ChevronLeft from 'lucide-react/dist/esm/icons/chevron-left';
 import ChevronRight from 'lucide-react/dist/esm/icons/chevron-right';
+import LayoutGrid from 'lucide-react/dist/esm/icons/layout-grid';
 import { Button } from '@/components/ui/button';
+import { Alert } from '@/components/ui/alert';
+import { EmptyState } from '@/components/ui/empty-state';
+import { PageHeader } from '@/components/common/page-header';
 import { useTranslations } from '@/lib/i18n';
 import {
   listApplications,
@@ -116,7 +120,7 @@ export function KanbanBoard() {
   }, [loading, isEmpty]);
 
   const scrollByColumn = (direction: 1 | -1) => {
-    scrollRef.current?.scrollBy({ left: direction * 320, behavior: 'smooth' });
+    scrollRef.current?.scrollBy({ left: direction * 300, behavior: 'smooth' });
   };
 
   const scrollToColumn = (status: ApplicationStatus) => {
@@ -185,54 +189,56 @@ export function KanbanBoard() {
 
   return (
     <div className="flex min-h-0 flex-1 flex-col">
-      {/* Header — mirrors the dashboard canvas header */}
-      <div className="flex shrink-0 flex-col gap-4 border-b border-black p-6 md:flex-row md:items-center md:justify-between md:p-8">
-        <div>
-          <h1 className="font-serif text-3xl font-bold uppercase tracking-tight text-ink md:text-4xl">
-            {t('tracker.title')}
-          </h1>
-          <p className="mt-2 font-mono text-xs uppercase tracking-wide text-ink-soft">
-            {t('tracker.subtitle')}
-          </p>
-        </div>
-        <div className="flex items-center gap-3">
-          {showScrollControls && (
-            <div className="flex items-center">
-              <button
-                type="button"
-                aria-label={t('tracker.scroll.prev')}
-                onClick={() => scrollByColumn(-1)}
-                disabled={!canScrollLeft}
-                className="flex h-10 w-10 items-center justify-center border border-black bg-background text-ink shadow-sw-xs transition-all hover:translate-x-[1px] hover:translate-y-[1px] hover:shadow-none disabled:pointer-events-none disabled:opacity-30"
-              >
-                <ChevronLeft className="h-4 w-4" />
-              </button>
-              <button
-                type="button"
-                aria-label={t('tracker.scroll.next')}
-                onClick={() => scrollByColumn(1)}
-                disabled={!canScrollRight}
-                className="-ml-px flex h-10 w-10 items-center justify-center border border-black bg-background text-ink shadow-sw-xs transition-all hover:translate-x-[1px] hover:translate-y-[1px] hover:shadow-none disabled:pointer-events-none disabled:opacity-30"
-              >
-                <ChevronRight className="h-4 w-4" />
-              </button>
+      {/* Header */}
+      <div className="shrink-0 border-b border-border p-6 md:p-8">
+        <PageHeader
+          title={t('tracker.title')}
+          description={t('tracker.subtitle')}
+          action={
+            <div className="flex items-center gap-2">
+              {showScrollControls && (
+                <div className="hidden items-center gap-1 sm:flex">
+                  <Button
+                    variant="outline"
+                    size="icon"
+                    aria-label={t('tracker.scroll.prev')}
+                    onClick={() => scrollByColumn(-1)}
+                    disabled={!canScrollLeft}
+                    className="h-9 w-9"
+                  >
+                    <ChevronLeft className="h-4 w-4" />
+                  </Button>
+                  <Button
+                    variant="outline"
+                    size="icon"
+                    aria-label={t('tracker.scroll.next')}
+                    onClick={() => scrollByColumn(1)}
+                    disabled={!canScrollRight}
+                    className="h-9 w-9"
+                  >
+                    <ChevronRight className="h-4 w-4" />
+                  </Button>
+                </div>
+              )}
+              <Button onClick={() => setManualAddOpen(true)}>
+                <Plus className="h-4 w-4" />
+                {t('tracker.addApplication')}
+              </Button>
             </div>
-          )}
-          <Button onClick={() => setManualAddOpen(true)}>
-            <Plus className="h-4 w-4" />
-            {t('tracker.addApplication')}
-          </Button>
-        </div>
+          }
+        />
       </div>
 
       {error && (
-        <div className="shrink-0 border-b border-black bg-background px-6 py-3 font-mono text-xs text-destructive md:px-8">
-          {error}
+        <div className="shrink-0 px-6 pt-4 md:px-8">
+          <Alert variant="error" area={t('tracker.title')}>
+            {error}
+          </Alert>
         </div>
       )}
 
       {selectedIds.size > 0 && (
-        <div className="shrink-0 border-b border-black px-6 py-3 md:px-8">
+        <div className="shrink-0 border-b border-border px-6 py-3 md:px-8">
           <BulkActionBar
             selectedCount={selectedIds.size}
             onMove={handleBulkMove}
@@ -250,10 +256,18 @@ export function KanbanBoard() {
             <Loader2 className="h-6 w-6 animate-spin text-steel-grey" />
           </div>
         ) : isEmpty ? (
-          <div className="flex flex-1 flex-col items-center justify-center p-10 text-center">
-            <p className="font-serif text-lg text-ink">{t('tracker.empty.title')}</p>
-            <p className="mt-1 font-mono text-xs text-ink-soft">{t('tracker.empty.description')}</p>
-          </div>
+          <EmptyState
+            className="flex-1"
+            icon={LayoutGrid}
+            title={t('tracker.empty.title')}
+            description={t('tracker.empty.description')}
+            action={
+              <Button onClick={() => setManualAddOpen(true)}>
+                <Plus className="h-4 w-4" />
+                {t('tracker.addApplication')}
+              </Button>
+            }
+          />
         ) : (
           <DndContext
             sensors={sensors}
@@ -266,7 +280,7 @@ export function KanbanBoard() {
                   key={status}
                   data-column={status}
                   className={`flex ${
-                    index < APPLICATION_STATUS_ORDER.length - 1 ? 'border-r border-black' : ''
+                    index < APPLICATION_STATUS_ORDER.length - 1 ? 'border-r border-border' : ''
                   }`}
                 >
                   <KanbanColumn
@@ -287,20 +301,20 @@ export function KanbanBoard() {
       {/* Stage rail — an always-visible map of every stage (with counts) so
           off-screen sections are never lost; click a stage to jump to it. */}
       {!isEmpty && (
-        <div className="flex shrink-0 items-center gap-3 overflow-x-auto border-t border-black bg-paper-tint px-6 py-2 md:px-8">
+        <div className="flex shrink-0 items-center gap-2 overflow-x-auto border-t border-border bg-paper-tint/60 px-6 py-2.5 md:px-8">
           {canScrollRight && (
-            <span className="flex shrink-0 items-center gap-1 font-mono text-[11px] font-bold uppercase tracking-wide text-primary">
+            <span className="flex shrink-0 items-center gap-1 text-xs font-semibold text-primary">
               {t('tracker.scroll.hint')}
               <ChevronRight className="h-3.5 w-3.5" />
             </span>
           )}
-          <div className="flex items-center gap-2">
+          <div className="flex items-center gap-1.5">
             {APPLICATION_STATUS_ORDER.map((status) => (
               <button
                 key={status}
                 type="button"
                 onClick={() => scrollToColumn(status)}
-                className="flex shrink-0 items-center gap-1.5 border border-black bg-background px-2 py-1 font-mono text-[11px] uppercase tracking-wide text-ink-soft shadow-sw-xs transition-all hover:translate-x-[1px] hover:translate-y-[1px] hover:text-primary hover:shadow-none"
+                className="flex shrink-0 cursor-pointer items-center gap-1.5 rounded-full bg-white px-2.5 py-1 text-xs font-medium text-ink-soft shadow-sw-xs transition-colors duration-150 hover:text-primary motion-reduce:transition-none"
               >
                 {t(`tracker.columns.${status}`)}
                 <span className="text-steel-grey">{columns[status].length}</span>

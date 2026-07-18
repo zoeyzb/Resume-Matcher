@@ -37,15 +37,13 @@ export const GenericTextForm: React.FC<GenericTextFormProps> = ({
 
   return (
     <div className="space-y-2">
-      <Label className="font-mono text-xs uppercase tracking-wider text-steel-grey">
-        {finalLabel}
-      </Label>
+      <Label>{finalLabel}</Label>
       <Textarea
         value={value || ''}
         onChange={(e) => onChange(e.target.value)}
         onKeyDown={handleKeyDown}
         placeholder={finalPlaceholder}
-        className="min-h-[150px] text-black rounded-none border-black focus-visible:ring-0 focus-visible:ring-offset-0 focus-visible:border-blue-700 bg-white"
+        className="min-h-[150px]"
       />
     </div>
   );

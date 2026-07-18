@@ -46,17 +46,20 @@ export function OutreachEditor({
   };
 
   return (
-    <div className={cn('flex flex-col h-full', className)}>
+    <div
+      className={cn(
+        'flex flex-col h-full rounded-xl border border-border overflow-hidden',
+        className
+      )}
+    >
       {/* Header */}
-      <div className="flex items-center justify-between p-4 border-b-2 border-black bg-[#F5F5F0]">
+      <div className="flex flex-wrap items-center justify-between gap-3 border-b border-border bg-paper-tint/40 p-4">
         <div className="flex items-center gap-2">
-          <Mail className="w-4 h-4" />
-          <h2 className="font-mono text-sm font-bold uppercase tracking-wider">
-            {t('outreach.title')}
-          </h2>
+          <Mail className="w-4 h-4 text-steel-grey" />
+          <h2 className="text-sm font-semibold text-ink">{t('outreach.title')}</h2>
         </div>
         <div className="flex items-center gap-3">
-          <span className="font-mono text-xs text-steel-grey">
+          <span className="text-xs text-steel-grey">
             {t('builder.contentStats.wordsChars', { wordCount, charCount })}
           </span>
           <Button size="sm" variant="outline" onClick={onSave} disabled={isSaving}>
@@ -87,18 +90,19 @@ export function OutreachEditor({
           placeholder={t('outreach.editor.placeholder')}
           className={cn(
             'w-full h-full min-h-[250px] p-4',
-            'font-mono text-sm leading-relaxed',
-            'border-2 border-black bg-white',
+            'text-sm leading-relaxed',
+            'rounded-lg border border-border bg-white',
             'resize-none',
-            'focus:outline-none focus:ring-2 focus:ring-blue-700 focus:ring-offset-2',
+            'transition-[border-color,box-shadow] duration-150 motion-reduce:transition-none',
+            'focus:outline-none focus:border-primary focus:ring-4 focus:ring-primary/10',
             'placeholder:text-steel-grey'
           )}
         />
       </div>
 
       {/* Footer Tips */}
-      <div className="p-4 border-t border-paper-tint bg-[#F5F5F0]">
-        <p className="font-mono text-xs text-steel-grey">{t('outreach.editor.tip')}</p>
+      <div className="border-t border-border bg-paper-tint/40 p-4">
+        <p className="text-xs text-steel-grey">{t('outreach.editor.tip')}</p>
       </div>
     </div>
   );

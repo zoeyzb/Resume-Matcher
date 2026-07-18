@@ -12,7 +12,7 @@ const RichTextEditor = dynamic(
   {
     ssr: false,
     loading: () => (
-      <div className="min-h-[100px] border border-black bg-transparent" aria-busy="true" />
+      <div className="min-h-[100px] rounded-lg border border-border bg-white" aria-busy="true" />
     ),
   }
 );
@@ -140,23 +140,21 @@ export const GenericItemForm: React.FC<GenericItemFormProps> = ({
   return (
     <div className="space-y-4">
       <div className="flex justify-end">
-        <Button
-          variant="outline"
-          size="sm"
-          onClick={handleAdd}
-          className="rounded-none border-black hover:bg-black hover:text-white transition-colors"
-        >
-          <Plus className="w-4 h-4 mr-2" /> {finalAddLabel}
+        <Button variant="outline" size="sm" onClick={handleAdd}>
+          <Plus className="w-4 h-4" /> {finalAddLabel}
         </Button>
       </div>
 
-      <div className="space-y-8">
+      <div className="space-y-4">
         {items.map((item) => (
-          <div key={item.id} className="p-6 border border-black bg-paper-tint relative group">
+          <div
+            key={item.id}
+            className="group relative rounded-xl border border-border bg-white p-6"
+          >
             <Button
               variant="ghost"
               size="icon"
-              className="absolute top-2 right-2 opacity-0 group-hover:opacity-100 transition-opacity text-destructive hover:text-destructive hover:bg-destructive/10"
+              className="absolute top-3 right-3 text-steel-grey opacity-0 transition-opacity duration-150 hover:text-destructive hover:bg-destructive/10 group-hover:opacity-100 motion-reduce:transition-none"
               onClick={() => handleRemove(item.id)}
               aria-label={t('a11y.removeItem')}
               title={t('a11y.removeItem')}
@@ -166,52 +164,40 @@ export const GenericItemForm: React.FC<GenericItemFormProps> = ({
 
             <div className="grid grid-cols-1 md:grid-cols-2 gap-4 mb-4 pr-8">
               <div className="space-y-2">
-                <Label className="font-mono text-xs uppercase tracking-wider text-steel-grey">
-                  {t('builder.genericItemForm.fields.title')}
-                </Label>
+                <Label>{t('builder.genericItemForm.fields.title')}</Label>
                 <Input
                   value={item.title || ''}
                   onChange={(e) => handleChange(item.id, 'title', e.target.value)}
                   placeholder={finalTitlePlaceholder}
-                  className="rounded-none border-black bg-white"
                 />
               </div>
               {showSubtitle && (
                 <div className="space-y-2">
-                  <Label className="font-mono text-xs uppercase tracking-wider text-steel-grey">
-                    {t('builder.genericItemForm.fields.organization')}
-                  </Label>
+                  <Label>{t('builder.genericItemForm.fields.organization')}</Label>
                   <Input
                     value={item.subtitle || ''}
                     onChange={(e) => handleChange(item.id, 'subtitle', e.target.value)}
                     placeholder={finalSubtitlePlaceholder}
-                    className="rounded-none border-black bg-white"
                   />
                 </div>
               )}
               {showLocation && (
                 <div className="space-y-2">
-                  <Label className="font-mono text-xs uppercase tracking-wider text-steel-grey">
-                    {t('builder.genericItemForm.fields.location')}
-                  </Label>
+                  <Label>{t('builder.genericItemForm.fields.location')}</Label>
                   <Input
                     value={item.location || ''}
                     onChange={(e) => handleChange(item.id, 'location', e.target.value)}
                     placeholder={finalLocationPlaceholder}
-                    className="rounded-none border-black bg-white"
                   />
                 </div>
               )}
               {showYears && (
                 <div className="space-y-2">
-                  <Label className="font-mono text-xs uppercase tracking-wider text-steel-grey">
-                    {t('builder.genericItemForm.fields.years')}
-                  </Label>
+                  <Label>{t('builder.genericItemForm.fields.years')}</Label>
                   <Input
                     value={item.years || ''}
                     onChange={(e) => handleChange(item.id, 'years', e.target.value)}
                     placeholder={finalYearsPlaceholder}
-                    className="rounded-none border-black bg-white"
                   />
                 </div>
               )}
@@ -219,16 +205,14 @@ export const GenericItemForm: React.FC<GenericItemFormProps> = ({
 
             <div className="space-y-3">
               <div className="flex justify-between items-center">
-                <Label className="font-mono text-xs uppercase tracking-wider text-steel-grey">
-                  {t('builder.genericItemForm.fields.descriptionPoints')}
-                </Label>
+                <Label>{t('builder.genericItemForm.fields.descriptionPoints')}</Label>
                 <Button
                   variant="ghost"
                   size="sm"
                   onClick={() => handleAddDescription(item.id)}
-                  className="h-6 text-xs text-blue-700 hover:text-blue-800 hover:bg-blue-50"
+                  className="h-7 text-xs text-primary hover:bg-indigo-50 hover:text-primary"
                 >
-                  <Plus className="w-3 h-3 mr-1" /> {t('builder.genericItemForm.actions.addPoint')}
+                  <Plus className="w-3 h-3" /> {t('builder.genericItemForm.actions.addPoint')}
                 </Button>
               </div>
               {item.description?.map((desc, idx) => (
@@ -245,7 +229,7 @@ export const GenericItemForm: React.FC<GenericItemFormProps> = ({
                     variant="ghost"
                     size="icon"
                     onClick={() => handleRemoveDescription(item.id, idx)}
-                    className="h-[60px] w-8 text-muted-foreground hover:text-destructive self-end"
+                    className="h-[60px] w-8 text-steel-grey hover:text-destructive self-end"
                     aria-label={t('a11y.removeDescription')}
                     title={t('a11y.removeDescription')}
                   >
@@ -258,17 +242,12 @@ export const GenericItemForm: React.FC<GenericItemFormProps> = ({
         ))}
 
         {items.length === 0 && (
-          <div className="text-center py-12 bg-paper-tint border border-dashed border-black">
-            <p className="font-mono text-sm text-steel-grey mb-4">
+          <div className="rounded-xl border border-dashed border-slate-200 bg-paper-tint/40 py-12 text-center">
+            <p className="mb-4 text-sm text-steel-grey">
               {t('builder.genericItemForm.noEntries', { label: finalItemLabel })}
             </p>
-            <Button
-              variant="outline"
-              size="sm"
-              onClick={handleAdd}
-              className="rounded-none border-black"
-            >
-              <Plus className="w-4 h-4 mr-2" />{' '}
+            <Button variant="outline" size="sm" onClick={handleAdd}>
+              <Plus className="w-4 h-4" />
               {t('builder.genericItemForm.addFirstItem', { label: finalItemLabel })}
             </Button>
           </div>

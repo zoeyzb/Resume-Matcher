@@ -16,11 +16,14 @@ import {
 import { fetchPromptConfig, type PromptOption } from '@/lib/api/config';
 import { Dropdown } from '@/components/ui/dropdown';
 import { useStatusCache } from '@/lib/context/status-cache';
-import { Loader2, ArrowLeft, AlertTriangle, Settings } from 'lucide-react';
+import { Loader2, ArrowLeft, Settings } from 'lucide-react';
 import { useTranslations } from '@/lib/i18n';
 import { DiffPreviewModal } from '@/components/tailor/diff-preview-modal';
 import { ATSScoreCard } from '@/components/tailor/ats-score-card';
 import { ConfirmDialog } from '@/components/ui/confirm-dialog';
+import { Alert } from '@/components/ui/alert';
+import { Card } from '@/components/ui/card';
+import { PageHeader } from '@/components/common/page-header';
 
 export default function TailorPage() {
   const { t } = useTranslations();
@@ -328,48 +331,38 @@ export default function TailorPage() {
   };
 
   return (
-    <div className="min-h-screen w-full bg-[#F6F5EE] flex flex-col items-center justify-center p-4 md:p-8 font-sans">
-      <div className="w-full max-w-4xl bg-white border border-black shadow-sw-lg p-8 md:p-12 lg:p-14 relative">
-        {/* Back Button */}
-        <Button variant="link" className="absolute top-4 left-4" onClick={() => router.back()}>
-          <ArrowLeft className="w-4 h-4" />
-          {t('common.back')}
-        </Button>
+    <div className="mx-auto w-full max-w-4xl px-4 py-8 md:px-8">
+      <PageHeader
+        title={t('tailor.heroTitle')}
+        description={t('tailor.pasteJobDescriptionBelow')}
+        action={
+          <Button variant="ghost" size="sm" onClick={() => router.back()}>
+            <ArrowLeft className="w-4 h-4" />
+            {t('common.back')}
+          </Button>
+        }
+      />
 
-        <div className="mb-8 mt-4 text-center">
-          <h1 className="font-serif text-4xl font-bold uppercase tracking-tight mb-2">
-            {t('tailor.heroTitle')}
-          </h1>
-          <p className="font-mono text-sm text-blue-700 font-bold uppercase">
-            {'// '}
-            {t('tailor.pasteJobDescriptionBelow')}
-          </p>
-        </div>
-
+      <Card className="mt-6">
         {/* LLM Not Configured Warning */}
         {!statusLoading && !isLlmConfigured && (
-          <div className="mb-6 border-2 border-amber-500 bg-amber-50 p-4 shadow-sw-default">
-            <div className="flex items-start gap-3">
-              <AlertTriangle className="w-5 h-5 text-amber-600 shrink-0 mt-0.5" />
-              <div className="flex-1">
-                <p className="font-mono text-sm font-bold uppercase tracking-wider text-amber-800">
-                  {t('tailor.setupRequiredTitle')}
-                </p>
-                <p className="font-mono text-xs text-amber-700 mt-1">
-                  {t('tailor.noApiKeyMessage')}
-                </p>
-                <Link
-                  href="/settings"
-                  className="inline-flex items-center gap-2 mt-3 text-amber-700 hover:text-amber-900 transition-colors"
-                >
-                  <Settings className="w-4 h-4" />
-                  <span className="font-mono text-xs font-bold uppercase underline">
-                    {t('tailor.configureApiKey')}
-                  </span>
-                </Link>
-              </div>
-            </div>
-          </div>
+          <Alert
+            variant="warning"
+            area={t('tailor.heroTitle')}
+            title={t('tailor.setupRequiredTitle')}
+            className="mb-6"
+            action={
+              <Link
+                href="/settings"
+                className="inline-flex items-center gap-2 text-sm font-semibold text-amber-800 underline-offset-2 hover:text-amber-900 hover:underline transition-colors motion-reduce:transition-none"
+              >
+                <Settings className="w-4 h-4" />
+                {t('tailor.configureApiKey')}
+              </Link>
+            }
+          >
+            {t('tailor.noApiKeyMessage')}
+          </Alert>
         )}
 
         <div className="space-y-6">
@@ -412,21 +405,21 @@ export default function TailorPage() {
           <div className="relative">
             <Textarea
               placeholder={t('tailor.jobDescriptionPlaceholder')}
-              className="min-h-[300px] font-mono text-sm bg-background border-2 border-black focus:ring-0 focus:border-blue-700 resize-none p-4 rounded-none"
+              className="min-h-[280px] resize-none p-4 pb-7 text-sm"
               value={jobDescription}
               onChange={(e) => setJobDescription(e.target.value)}
               onKeyDown={handleTextareaKeyDown}
               disabled={isLoading}
             />
-            <div className="absolute bottom-2 right-2 text-xs font-mono text-steel-grey pointer-events-none">
+            <div className="pointer-events-none absolute bottom-3 right-3 text-xs text-steel-grey">
               {t('tailor.charactersCount', { count: jobDescription.length })}
             </div>
           </div>
 
           {error && (
-            <div className="p-4 bg-red-50 border border-red-200 text-red-700 text-sm font-mono flex items-center gap-2">
-              <span>!</span> {error}
-            </div>
+            <Alert variant="error" area={t('tailor.heroTitle')}>
+              {error}
+            </Alert>
           )}
 
           <Button
@@ -439,9 +432,7 @@ export default function TailorPage() {
               <>
                 <Loader2 className="w-5 h-5 animate-spin" />
                 {t('common.processing')}
-                {elapsed > 0 && (
-                  <span className="font-mono text-xs opacity-70 ml-2">{elapsed}s</span>
-                )}
+                {elapsed > 0 && <span className="ml-2 text-xs opacity-80">{elapsed}s</span>}
               </>
             ) : statusLoading ? (
               <>
@@ -455,11 +446,11 @@ export default function TailorPage() {
             )}
           </Button>
         </div>
-      </div>
+      </Card>
 
       {/* ATS Score Breakdown — shown once a preview result is available */}
       {pendingResult?.data?.ats_score && (
-        <div className="w-full max-w-4xl mt-6">
+        <div className="mt-6">
           <ATSScoreCard atsScore={pendingResult.data.ats_score} />
         </div>
       )}

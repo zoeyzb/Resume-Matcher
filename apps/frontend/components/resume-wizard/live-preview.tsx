@@ -43,41 +43,37 @@ export function LivePreview({ resumeData, inferredSkills }: LivePreviewProps) {
   return (
     <aside
       aria-label={t('resumeWizard.preview.label')}
-      className="border-2 border-black bg-white p-5 shadow-[4px_4px_0px_0px_#000000]"
+      className="rounded-2xl border border-border bg-white p-5 shadow-sw-card"
     >
-      <p className="font-mono text-xs font-bold uppercase tracking-wider text-blue-700">
-        {t('resumeWizard.preview.label')}
-      </p>
+      <p className="text-xs font-semibold text-primary">{t('resumeWizard.preview.label')}</p>
 
       {!hasAnyContent ? (
-        <p className="mt-6 font-sans text-sm text-steel-grey">{t('resumeWizard.preview.empty')}</p>
+        <p className="mt-6 text-sm text-steel-grey">{t('resumeWizard.preview.empty')}</p>
       ) : (
         <div className="mt-3 space-y-5">
           <div>
-            <h2 className="font-serif text-2xl font-bold leading-tight">
+            <h2 className="text-2xl font-bold leading-tight text-ink">
               {personalInfo.name?.trim() || t('resumeWizard.preview.unnamed')}
             </h2>
             {personalInfo.title?.trim() && (
-              <p className="font-sans text-sm text-steel-grey">{personalInfo.title}</p>
+              <p className="text-sm text-steel-grey">{personalInfo.title}</p>
             )}
           </div>
 
           {experience.length > 0 && (
             <section>
-              <p className="border-b border-black pb-1 font-mono text-xs font-bold uppercase tracking-wider">
+              <p className="border-b border-border pb-1 text-xs font-semibold text-ink-soft">
                 {t('resumeWizard.preview.experience')}
               </p>
               {experience.map((item) => (
                 <div key={item.id} className="mt-2">
-                  <p className="font-sans text-sm font-bold">
+                  <p className="text-sm font-bold text-ink">
                     {[item.title, item.company].filter(Boolean).join(' · ')}
                   </p>
-                  {item.years?.trim() && (
-                    <p className="font-mono text-xs text-steel-grey">{item.years}</p>
-                  )}
+                  {item.years?.trim() && <p className="text-xs text-steel-grey">{item.years}</p>}
                   <ul className="mt-1 list-none space-y-1">
                     {(item.description ?? []).map((line, index) => (
-                      <li key={index} className="font-sans text-xs leading-snug">
+                      <li key={index} className="text-xs leading-snug text-ink-soft">
                         {line}
                       </li>
                     ))}
@@ -89,11 +85,11 @@ export function LivePreview({ resumeData, inferredSkills }: LivePreviewProps) {
 
           {projects.length > 0 && (
             <section>
-              <p className="border-b border-black pb-1 font-mono text-xs font-bold uppercase tracking-wider">
+              <p className="border-b border-border pb-1 text-xs font-semibold text-ink-soft">
                 {t('resumeWizard.preview.projects')}
               </p>
               {projects.map((item) => (
-                <p key={item.id} className="mt-2 font-sans text-sm font-bold">
+                <p key={item.id} className="mt-2 text-sm font-bold text-ink">
                   {item.name}
                 </p>
               ))}
@@ -102,11 +98,11 @@ export function LivePreview({ resumeData, inferredSkills }: LivePreviewProps) {
 
           {education.length > 0 && (
             <section>
-              <p className="border-b border-black pb-1 font-mono text-xs font-bold uppercase tracking-wider">
+              <p className="border-b border-border pb-1 text-xs font-semibold text-ink-soft">
                 {t('resumeWizard.preview.education')}
               </p>
               {education.map((item) => (
-                <p key={item.id} className="mt-2 font-sans text-sm">
+                <p key={item.id} className="mt-2 text-sm text-ink-soft">
                   {[item.degree, item.institution].filter(Boolean).join(' · ')}
                 </p>
               ))}
@@ -115,10 +111,10 @@ export function LivePreview({ resumeData, inferredSkills }: LivePreviewProps) {
 
           {skills.length > 0 && (
             <section>
-              <p className="border-b border-black pb-1 font-mono text-xs font-bold uppercase tracking-wider">
+              <p className="border-b border-border pb-1 text-xs font-semibold text-ink-soft">
                 {t('resumeWizard.preview.skills')}
               </p>
-              <div className="mt-2 flex flex-wrap gap-2">
+              <div className="mt-2 flex flex-wrap gap-1.5">
                 {skills.map((skill) => {
                   const isNew = inferredKeys.has(skill.toLowerCase());
                   return (
@@ -126,8 +122,8 @@ export function LivePreview({ resumeData, inferredSkills }: LivePreviewProps) {
                       key={skill}
                       className={
                         isNew
-                          ? 'border border-green-700 bg-background px-2 py-1 font-mono text-xs text-green-700'
-                          : 'border border-black bg-background px-2 py-1 font-mono text-xs'
+                          ? 'rounded-full bg-emerald-50 px-2.5 py-1 text-xs text-emerald-700'
+                          : 'rounded-full bg-paper-tint px-2.5 py-1 text-xs text-ink-soft'
                       }
                     >
                       {skill}

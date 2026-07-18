@@ -3,6 +3,7 @@
 import * as React from 'react';
 import { AlertTriangle, Lightbulb, ListChecks, MessageSquareText, Target } from 'lucide-react';
 import { GeneratePrompt } from './generate-prompt';
+import { Alert } from '@/components/ui/alert';
 import type {
   InterviewPrepData,
   InterviewPrepQuestion,
@@ -32,10 +33,10 @@ function Section({
   children: React.ReactNode;
 }) {
   return (
-    <section className="border-2 border-black bg-white p-4 space-y-3">
-      <div className="flex items-center gap-2 border-b border-black/10 pb-2">
-        <Icon className="w-4 h-4 text-blue-700" />
-        <h3 className="font-mono text-sm font-bold uppercase tracking-wider">{title}</h3>
+    <section className="rounded-xl border border-border bg-white p-4 space-y-3">
+      <div className="flex items-center gap-2 border-b border-border pb-2.5">
+        <Icon className="w-4 h-4 text-primary" />
+        <h3 className="text-sm font-semibold text-ink">{title}</h3>
       </div>
       {children}
     </section>
@@ -48,7 +49,7 @@ function StringList({ items }: { items: string[] }) {
     <ul className="space-y-2">
       {items.map((item, index) => (
         <li key={`${item}-${index}`} className="flex gap-2 text-sm leading-relaxed text-ink-soft">
-          <span className="mt-2 h-1.5 w-1.5 shrink-0 bg-blue-700" />
+          <span className="mt-2 h-1.5 w-1.5 shrink-0 rounded-full bg-primary" />
           <span>{item}</span>
         </li>
       ))}
@@ -63,16 +64,16 @@ function QuestionList({ items }: { items: InterviewPrepQuestion[] }) {
   return (
     <div className="space-y-3">
       {items.map((item, index) => (
-        <div key={`${item.question}-${index}`} className="border border-black bg-paper-tint p-3">
-          <p className="font-mono text-sm font-bold leading-relaxed">{item.question}</p>
+        <div key={`${item.question}-${index}`} className="rounded-lg bg-paper-tint/50 p-3">
+          <p className="text-sm font-semibold leading-relaxed text-ink">{item.question}</p>
           {item.focus_area && (
-            <p className="mt-2 text-xs font-mono uppercase tracking-wide text-blue-700">
+            <p className="mt-2 text-xs font-medium text-primary">
               {t('interviewPrep.focusArea')}: {item.focus_area}
             </p>
           )}
           {item.suggested_answer_points.length > 0 && (
             <div className="mt-3">
-              <p className="font-mono text-xs font-bold uppercase text-steel-grey">
+              <p className="text-xs font-semibold text-steel-grey">
                 {t('interviewPrep.suggestedAnswerPoints')}
               </p>
               <StringList items={item.suggested_answer_points} />
@@ -91,17 +92,17 @@ function SkillGapList({ items }: { items: InterviewPrepSkillGap[] }) {
   return (
     <div className="space-y-3">
       {items.map((item, index) => (
-        <div key={`${item.skill}-${index}`} className="border border-black bg-paper-tint p-3">
-          <p className="font-mono text-sm font-bold uppercase">{item.skill}</p>
+        <div key={`${item.skill}-${index}`} className="rounded-lg bg-paper-tint/50 p-3">
+          <p className="text-sm font-semibold text-ink">{item.skill}</p>
           <div className="mt-3 space-y-2 text-sm text-ink-soft">
             <p>
-              <span className="font-mono text-xs font-bold uppercase text-steel-grey">
+              <span className="text-xs font-semibold text-steel-grey">
                 {t('interviewPrep.whyItMatters')}:{' '}
               </span>
               {item.why_it_matters}
             </p>
             <p>
-              <span className="font-mono text-xs font-bold uppercase text-steel-grey">
+              <span className="text-xs font-semibold text-steel-grey">
                 {t('interviewPrep.preparationSuggestion')}:{' '}
               </span>
               {item.preparation_suggestion}
@@ -129,20 +130,19 @@ export function InterviewPrepView({
     return (
       <div className={className}>
         {error && (
-          <div className="mb-4 flex items-start gap-3 border-2 border-red-700 bg-red-50 p-4 text-red-900">
-            <AlertTriangle className="mt-0.5 h-4 w-4 shrink-0" />
-            <p className="text-sm font-mono leading-relaxed">{error}</p>
-          </div>
+          <Alert variant="error" className="mb-4">
+            {error}
+          </Alert>
         )}
         {isTailoredResume && !canGenerate ? (
           <div className="flex flex-col items-center justify-center min-h-[400px] p-12 text-center">
-            <div className="w-16 h-16 border-2 border-amber-700 bg-amber-50 flex items-center justify-center mb-6">
-              <AlertTriangle className="w-8 h-8 text-amber-700" />
+            <div className="mb-6 flex h-14 w-14 items-center justify-center rounded-full bg-amber-50">
+              <AlertTriangle className="h-6 w-6 text-amber-600" />
             </div>
-            <h3 className="font-mono text-sm font-bold uppercase tracking-wider text-ink-soft mb-3">
+            <h3 className="mb-2 text-base font-semibold text-ink">
               {t('interviewPrep.unavailableTitle')}
             </h3>
-            <p className="font-mono text-xs text-steel-grey max-w-md leading-relaxed">
+            <p className="max-w-md text-sm leading-relaxed text-steel-grey">
               {unavailableMessage ?? t('interviewPrep.missingContextDescription')}
             </p>
           </div>
@@ -160,19 +160,11 @@ export function InterviewPrepView({
 
   return (
     <div className={cn('space-y-4 p-6', className)}>
-      {error && (
-        <div className="flex items-start gap-3 border-2 border-red-700 bg-red-50 p-4 text-red-900">
-          <AlertTriangle className="mt-0.5 h-4 w-4 shrink-0" />
-          <p className="text-sm font-mono leading-relaxed">{error}</p>
-        </div>
-      )}
+      {error && <Alert variant="error">{error}</Alert>}
       {isTailoredResume && !canGenerate && (
-        <div className="flex items-start gap-3 border-2 border-amber-700 bg-amber-50 p-4 text-amber-900">
-          <AlertTriangle className="mt-0.5 h-4 w-4 shrink-0" />
-          <p className="text-sm font-mono leading-relaxed">
-            {unavailableMessage ?? t('interviewPrep.missingContextDescription')}
-          </p>
-        </div>
+        <Alert variant="warning">
+          {unavailableMessage ?? t('interviewPrep.missingContextDescription')}
+        </Alert>
       )}
 
       <Section title={t('interviewPrep.sections.roleFit')} icon={Target}>

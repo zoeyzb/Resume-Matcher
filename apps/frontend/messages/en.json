@@ -45,7 +45,10 @@
     "settings": "Settings",
     "backToDashboard": "Back to Dashboard",
     "goToSettings": "Go to Settings",
-    "applicationTracker": "Application Tracker"
+    "applicationTracker": "Application Tracker",
+    "tracker": "Tracker",
+    "openMenu": "Open menu",
+    "closeMenu": "Close menu"
   },
   "dashboard": {
     "title": "Dashboard",
@@ -663,6 +666,7 @@
       "apiKeyNotRequiredPlaceholder": "Not required for local models",
       "apiKeyOptionalPlaceholder": "Leave blank if your server has no auth",
       "leaveBlankToKeepExistingKey": "LEAVE BLANK TO KEEP EXISTING KEY",
+      "advancedSettingsLabel": "Advanced settings",
       "baseUrlLabel": "Base URL (optional)",
       "baseUrlPlaceholder": "e.g. https://api.openai.com/v1",
       "baseUrlDescription": "Override the API base URL to use a proxy/aggregator endpoint. Leave blank to use provider default.",

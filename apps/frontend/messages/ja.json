@@ -45,7 +45,10 @@
     "settings": "設定",
     "backToDashboard": "ダッシュボードに戻る",
     "goToSettings": "設定へ",
-    "applicationTracker": "応募トラッカー"
+    "applicationTracker": "応募トラッカー",
+    "tracker": "トラッカー",
+    "openMenu": "メニューを開く",
+    "closeMenu": "メニューを閉じる"
   },
   "dashboard": {
     "title": "ダッシュボード",
@@ -663,6 +666,7 @@
       "apiKeyNotRequiredPlaceholder": "ローカルモデルでは不要",
       "apiKeyOptionalPlaceholder": "サーバーに認証が必要ない場合は空欄のままでOK",
       "leaveBlankToKeepExistingKey": "空欄のままにすると既存キーを保持します",
+      "advancedSettingsLabel": "詳細設定",
       "baseUrlLabel": "ベースURL（任意）",
       "baseUrlPlaceholder": "例: https://api.openai.com/v1",
       "baseUrlDescription": "プロキシ/アグリゲーター等のエンドポイントを使う場合に Base URL を上書きできます。空欄の場合は既定値を使用します。",
