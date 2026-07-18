@@ -1006,5 +1006,24 @@
       "moveFailed": "Impossible de déplacer la candidature.",
       "deleteFailed": "Impossible de supprimer la ou les candidatures."
     }
+  },
+  "interviewPrep": {
+    "title": "Préparation à l'entretien",
+    "regenerate": "Régénérer",
+    "unavailableTitle": "Préparation à l'entretien non disponible",
+    "loadingContextDescription": "Vérification du contexte du poste pour ce CV adapté avant la génération.",
+    "missingContextDescription": "Ce CV adapté ne dispose pas du contexte de poste enregistré nécessaire pour générer la préparation à l'entretien. Adaptez à nouveau le CV avec une fiche de poste pour utiliser cette fonctionnalité.",
+    "saveRequiredDescription": "Enregistrez ce CV adapté avant de générer la préparation à l'entretien.",
+    "focusArea": "Domaine d'attention",
+    "suggestedAnswerPoints": "Points de réponse suggérés",
+    "whyItMatters": "Pourquoi c'est important",
+    "preparationSuggestion": "Suggestion de préparation",
+    "sections": {
+      "roleFit": "Analyse d'adéquation au poste",
+      "resumeQuestions": "Questions basées sur le CV",
+      "projectFollowUps": "Questions de suivi sur les projets",
+      "skillGaps": "Lacunes de compétences",
+      "talkingPoints": "Points clés à aborder"
+    }
   }
 }
