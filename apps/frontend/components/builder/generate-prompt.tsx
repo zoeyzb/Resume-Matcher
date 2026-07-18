@@ -45,16 +45,16 @@ export function GeneratePrompt({
           className
         )}
       >
-        <div className="w-16 h-16 border-2 border-steel-grey bg-paper-tint flex items-center justify-center mb-6">
-          <Icon className="w-8 h-8 text-steel-grey" />
+        <div className="mb-6 flex h-14 w-14 items-center justify-center rounded-full bg-slate-100">
+          <Icon className="h-6 w-6 text-steel-grey" />
         </div>
-        <h3 className="font-mono text-sm font-bold uppercase tracking-wider text-ink-soft mb-3">
+        <h3 className="mb-2 text-base font-semibold text-ink">
           {t('builder.generatePrompt.notAvailableTitle', { title })}
         </h3>
-        <p className="font-mono text-xs text-steel-grey max-w-md mb-6 leading-relaxed">
+        <p className="mb-6 max-w-md text-sm leading-relaxed text-steel-grey">
           {t('builder.generatePrompt.notAvailableDescription', { title })}
         </p>
-        <div className="flex items-center gap-2 text-blue-700 font-mono text-xs">
+        <div className="flex items-center gap-1.5 text-sm font-medium text-primary">
           <span>{t('builder.generatePrompt.goToDashboard')}</span>
           <ArrowRight className="w-4 h-4" />
         </div>
@@ -69,20 +69,20 @@ export function GeneratePrompt({
         className
       )}
     >
-      <div className="w-16 h-16 border-2 border-blue-700 bg-blue-50 flex items-center justify-center mb-6">
-        <Icon className="w-8 h-8 text-blue-700" />
+      <div className="mb-6 flex h-14 w-14 items-center justify-center rounded-full bg-indigo-50">
+        <Icon className="h-6 w-6 text-primary" />
       </div>
-      <h3 className="font-mono text-sm font-bold uppercase tracking-wider mb-3">
+      <h3 className="mb-2 text-base font-semibold text-ink">
         {t('builder.generatePrompt.generateTitle', { title })}
       </h3>
-      <p className="font-mono text-xs text-ink-soft max-w-md mb-6 leading-relaxed">
+      <p className="mb-6 max-w-md text-sm leading-relaxed text-steel-grey">
         {isInterviewPrep
           ? t('builder.generatePrompt.interviewPrepDescription')
           : isOutreach
             ? t('builder.generatePrompt.outreachDescription')
             : t('builder.generatePrompt.coverLetterDescription')}
       </p>
-      <Button onClick={onGenerate} disabled={isGenerating} className="gap-2">
+      <Button onClick={onGenerate} disabled={isGenerating}>
         {isGenerating ? (
           <>
             <Loader2 className="w-4 h-4 animate-spin" />
@@ -95,7 +95,7 @@ export function GeneratePrompt({
           </>
         )}
       </Button>
-      <p className="font-mono text-xs text-steel-grey mt-4">
+      <p className="mt-4 text-xs text-steel-grey">
         {isInterviewPrep
           ? t('builder.generatePrompt.interviewPrepFooter')
           : isOutreach

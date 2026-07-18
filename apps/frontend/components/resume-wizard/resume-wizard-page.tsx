@@ -3,6 +3,7 @@
 import { useEffect, useState } from 'react';
 import { useRouter } from 'next/navigation';
 import { Button } from '@/components/ui/button';
+import { Alert } from '@/components/ui/alert';
 import { useStatusCache } from '@/lib/context/status-cache';
 import { useTranslations } from '@/lib/i18n';
 import {
@@ -260,25 +261,20 @@ export function ResumeWizardPage() {
   };
 
   return (
-    <main className="min-h-screen bg-background px-4 py-6 text-black md:px-8 md:py-10">
+    <main className="min-h-screen bg-background px-4 py-6 text-ink md:px-8 md:py-10">
       <div className="mx-auto grid max-w-7xl gap-6 lg:grid-cols-[minmax(0,1fr)_360px]">
         <div className="grid gap-4">
           <div className="flex items-center justify-between">
-            <h1 className="font-mono text-xs font-bold uppercase tracking-wider text-steel-grey">
-              {t('resumeWizard.title')}
-            </h1>
+            <h1 className="text-sm font-semibold text-ink-soft">{t('resumeWizard.title')}</h1>
             <Button type="button" variant="ghost" onClick={() => router.push('/dashboard')}>
               {t('resumeWizard.actions.backToDashboard')}
             </Button>
           </div>
 
           {errorKey && (
-            <div className="border-2 border-red-600 bg-red-100 p-4" role="alert">
-              <p className="font-mono text-sm font-bold uppercase tracking-wider text-red-600">
-                {t('common.error')}
-              </p>
-              <p className="mt-1 font-sans text-sm">{t(errorKey)}</p>
-            </div>
+            <Alert variant="error" area={t('resumeWizard.title')} title={t('common.error')}>
+              {t(errorKey)}
+            </Alert>
           )}
 
           <QuestionCard

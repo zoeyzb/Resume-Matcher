@@ -4,8 +4,12 @@
 @source "../../../{app,components,hooks,lib,messages}/**/*.{js,ts,jsx,tsx,mdx}";
 
 @theme inline {
-  /* No --radius-* tokens — Swiss style commits to rounded-none everywhere.
-     Dead tokens removed. */
+  --radius-sm: 6px;
+  --radius-md: 8px;
+  --radius-lg: 12px;
+  --radius-xl: 16px;
+  --radius-2xl: 20px;
+
   --color-background: var(--background);
   --color-foreground: var(--foreground);
   --color-card: var(--card);
@@ -38,33 +42,43 @@
   --color-sidebar-border: var(--sidebar-border);
   --color-sidebar-ring: var(--sidebar-ring);
 
-  /* Swiss Style brand tokens. --color-primary, --color-destructive,
-     --color-secondary, --color-background already exist above via the
-     legacy var(--xxx) chain — these are only the additional brand
-     semantics that didn't exist as @theme tokens before. */
-  --color-canvas: #f0f0e8;
-  --color-ink: #000000;
-  --color-success: #15803d;
-  --color-warning: #f97316;
+  /* Product brand tokens — premium neutral palette, single indigo accent.
+     --color-primary/--color-destructive/--color-secondary/--color-background
+     already exist above via the legacy var(--xxx) chain; these are the
+     additional semantics referenced directly by components (bg-canvas,
+     text-ink-soft, etc). Kept under their original names so every existing
+     call site re-themes automatically. */
+  --color-canvas: #f8fafc; /* slate-50 page background */
+  --color-ink: #0f172a; /* slate-900 primary text/headings */
+  --color-ink-soft: #334155; /* slate-700 secondary body text */
+  --color-steel-grey: #64748b; /* slate-500 tertiary/caption text */
+  --color-paper-tint: #f1f5f9; /* slate-100 subtle fills */
 
-  /* Brand-tinted neutrals (OKLCH, chroma tinted ~0.005-0.018 toward
-     Hyper Blue hue 264) — replace ad-hoc Tailwind grays. */
-  --color-paper-tint: oklch(96% 0.005 264); /* replaces gray-50/100/200 */
-  --color-steel-grey: oklch(64% 0.012 264); /* replaces gray-300/400/500 */
-  --color-ink-soft: oklch(38% 0.018 264); /* replaces gray-600/700/800/900 */
+  --color-success: #059669; /* emerald-600 */
+  --color-success-tint: #ecfdf5;
+  --color-warning: #d97706; /* amber-600 */
+  --color-warning-tint: #fffbeb;
+  --color-destructive-tint: #fef2f2;
+  --color-info-tint: #eff6ff;
 
-  /* Hard offset shadows in solid ink — Swiss style commits to no blur.
-     Sized small (1px) through xl (12px) for Hero/featured surfaces. */
-  --shadow-sw-xs: 1px 1px 0px 0px #000000;
-  --shadow-sw-sm: 2px 2px 0px 0px #000000;
-  --shadow-sw-default: 4px 4px 0px 0px #000000;
-  --shadow-sw-card: 6px 6px 0px 0px #000000;
-  --shadow-sw-lg: 8px 8px 0px 0px #000000;
-  --shadow-sw-xl: 12px 12px 0px 0px #000000;
+  --color-primary-hover: #4338ca; /* indigo-700 */
+  --color-primary-tint: #eef2ff; /* indigo-50 */
 
-  /* Fonts */
-  --font-sans: 'Geist Sans', sans-serif;
-  --font-mono: 'Space Grotesk', monospace;
+  /* Soft, layered shadows — never a hard offset. Kept under the original
+     --shadow-sw-* names so every existing shadow-sw-* call site re-themes
+     automatically without touching each component. */
+  --shadow-sw-xs: 0 1px 2px 0 rgba(15, 23, 42, 0.04);
+  --shadow-sw-sm: 0 1px 3px 0 rgba(15, 23, 42, 0.08), 0 1px 2px -1px rgba(15, 23, 42, 0.06);
+  --shadow-sw-default:
+    0 4px 12px -2px rgba(15, 23, 42, 0.08), 0 2px 4px -2px rgba(15, 23, 42, 0.06);
+  --shadow-sw-card: 0 8px 24px -4px rgba(15, 23, 42, 0.1), 0 2px 6px -2px rgba(15, 23, 42, 0.06);
+  --shadow-sw-lg: 0 16px 40px -8px rgba(15, 23, 42, 0.14), 0 4px 12px -4px rgba(15, 23, 42, 0.08);
+  --shadow-sw-xl: 0 24px 60px -12px rgba(15, 23, 42, 0.18);
+
+  /* Fonts — single geometric sans across the whole product; mono reserved
+     for the rare technical value (version strings, model ids). */
+  --font-sans: 'Plus Jakarta Sans', ui-sans-serif, system-ui, sans-serif;
+  --font-mono: ui-monospace, 'SF Mono', 'Cascadia Code', Consolas, monospace;
 
   /* Animations */
   --animate-gradient: gradient 8s linear infinite;
@@ -77,57 +91,55 @@
 }
 
 :root {
-  --font-mono: 'Geist Mono', monospace;
-  --font-sans: 'Geist', sans-serif;
+  --font-mono: ui-monospace, 'SF Mono', 'Cascadia Code', Consolas, monospace;
+  --font-sans: 'Plus Jakarta Sans', sans-serif;
 
-  /* Swiss International Style Palette */
-  --background: #f0f0e8; /* Canvas */
-  --foreground: #000000; /* Ink */
+  /* Premium neutral palette */
+  --background: #f8fafc; /* slate-50 */
+  --foreground: #0f172a; /* slate-900 */
 
-  --card: #f0f0e8;
-  --card-foreground: #000000;
+  --card: #ffffff;
+  --card-foreground: #0f172a;
 
-  --popover: #f0f0e8;
-  --popover-foreground: #000000;
+  --popover: #ffffff;
+  --popover-foreground: #0f172a;
 
-  --primary: #1d4ed8; /* Hyper Blue */
+  --primary: #4f46e5; /* indigo-600 */
   --primary-foreground: #ffffff;
 
-  --secondary: #e5e5e0; /* Panel Grey */
-  --secondary-foreground: #000000;
+  --secondary: #f1f5f9; /* slate-100 */
+  --secondary-foreground: #0f172a;
 
-  --muted: #e5e5e0;
-  --muted-foreground: #6b7280;
+  --muted: #f1f5f9;
+  --muted-foreground: #64748b;
 
-  --accent: #e5e5e0;
-  --accent-foreground: #000000;
+  --accent: #eef2ff; /* indigo-50 */
+  --accent-foreground: #3730a3;
 
-  --destructive: #dc2626; /* Alert Red */
+  --destructive: #dc2626;
   --destructive-foreground: #ffffff;
 
-  --border: #000000;
-  --input: #f0f0e8;
-  --ring: #1d4ed8;
+  --border: #e2e8f0; /* slate-200 */
+  --input: #ffffff;
+  --ring: #4f46e5;
 
-  --chart-1: #1d4ed8;
-  --chart-2: #15803d;
-  --chart-3: #f97316;
+  --chart-1: #4f46e5;
+  --chart-2: #059669;
+  --chart-3: #d97706;
   --chart-4: #dc2626;
-  --chart-5: #000000;
+  --chart-5: #0f172a;
 
-  --sidebar: #e5e5e0;
-  --sidebar-foreground: #000000;
-  --sidebar-primary: #1d4ed8;
+  --sidebar: #ffffff;
+  --sidebar-foreground: #0f172a;
+  --sidebar-primary: #4f46e5;
   --sidebar-primary-foreground: #ffffff;
-  --sidebar-accent: #d8d8d2;
-  --sidebar-accent-foreground: #000000;
-  --sidebar-border: #000000;
-  --sidebar-ring: #1d4ed8;
+  --sidebar-accent: #f1f5f9;
+  --sidebar-accent-foreground: #0f172a;
+  --sidebar-border: #e2e8f0;
+  --sidebar-ring: #4f46e5;
 }
 
-/* Light theme only — Swiss/Brutalist works on the warm Canvas background.
-   The half-finished dark mode mapping was removed; .impeccable.md commits
-   to light only. */
+/* Light theme only. */
 
 @layer base {
   * {
@@ -136,9 +148,6 @@
   body {
     @apply bg-background text-foreground;
   }
-  /* The global `button { font-family: var(--font-mono) }` rule was removed.
-     The Button component applies font-mono via its Tailwind classes, and the
-     global rule was leaking into nested text inside <button> elements. */
 }
 
 /* Respect the OS-level "reduce motion" preference. Decorative

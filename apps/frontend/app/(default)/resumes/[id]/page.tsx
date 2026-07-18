@@ -285,10 +285,8 @@ export default function ResumeViewerPage() {
   if (loading) {
     return (
       <div className="min-h-screen flex flex-col items-center justify-center bg-background">
-        <Loader2 className="w-10 h-10 animate-spin text-blue-700 mb-4" />
-        <p className="font-mono text-sm font-bold uppercase text-blue-700">
-          {t('resumeViewer.loading')}
-        </p>
+        <Loader2 className="w-8 h-8 animate-spin text-primary mb-4" />
+        <p className="text-sm font-medium text-ink-soft">{t('resumeViewer.loading')}</p>
       </div>
     );
   }
@@ -301,26 +299,28 @@ export default function ResumeViewerPage() {
       <>
         <div className="min-h-screen flex flex-col items-center justify-center bg-background p-4">
           <div
-            className={`border p-6 text-center max-w-md shadow-sw-default ${
-              isProcessing
-                ? 'bg-blue-50 border-blue-200'
-                : isFailed
-                  ? 'bg-orange-50 border-orange-200'
-                  : 'bg-red-50 border-red-200'
+            className={`rounded-2xl p-6 text-center max-w-md ${
+              isProcessing ? 'bg-indigo-50' : isFailed ? 'bg-amber-50' : 'bg-red-50'
             }`}
           >
             <div className="flex justify-center mb-4">
-              {isProcessing ? (
-                <Loader2 className="w-8 h-8 animate-spin text-blue-700" />
-              ) : isFailed ? (
-                <AlertCircle className="w-8 h-8 text-orange-600" />
-              ) : (
-                <AlertCircle className="w-8 h-8 text-red-600" />
-              )}
+              <div
+                className={`flex h-12 w-12 items-center justify-center rounded-full ${
+                  isProcessing ? 'bg-indigo-100' : isFailed ? 'bg-amber-100' : 'bg-red-100'
+                }`}
+              >
+                {isProcessing ? (
+                  <Loader2 className="w-6 h-6 animate-spin text-primary" />
+                ) : isFailed ? (
+                  <AlertCircle className="w-6 h-6 text-amber-600" />
+                ) : (
+                  <AlertCircle className="w-6 h-6 text-red-600" />
+                )}
+              </div>
             </div>
             <p
-              className={`font-bold mb-4 ${
-                isProcessing ? 'text-blue-700' : isFailed ? 'text-orange-700' : 'text-red-700'
+              className={`font-semibold mb-4 ${
+                isProcessing ? 'text-primary' : isFailed ? 'text-amber-700' : 'text-red-700'
               }`}
             >
               {error || t('resumeViewer.resumeNotFound')}
@@ -331,7 +331,7 @@ export default function ResumeViewerPage() {
                   <Button onClick={handleRetryProcessing} disabled={isRetrying}>
                     {isRetrying ? (
                       <>
-                        <Loader2 className="w-4 h-4 mr-2 animate-spin" />
+                        <Loader2 className="w-4 h-4 animate-spin" />
                         {t('common.processing')}
                       </>
                     ) : (
@@ -401,7 +401,7 @@ export default function ResumeViewerPage() {
                 autoFocus
                 maxLength={80}
                 placeholder={t('resumeViewer.titlePlaceholder')}
-                className="font-serif text-2xl font-bold border-b-2 border-black bg-transparent outline-none w-full max-w-xl px-0 py-1"
+                className="w-full max-w-xl border-b-2 border-primary bg-transparent px-0 py-1 text-2xl font-bold text-ink outline-none"
               />
             ) : (
               <button
@@ -409,15 +409,15 @@ export default function ResumeViewerPage() {
                   setEditingTitleValue(resumeTitle || '');
                   setIsEditingTitle(true);
                 }}
-                className="group flex items-center gap-2 cursor-pointer bg-transparent border-none p-0"
+                className="group flex cursor-pointer items-center gap-2 border-none bg-transparent p-0"
               >
                 <h2
-                  className={`font-serif text-2xl font-bold border-b-2 border-transparent group-hover:border-black transition-colors ${!resumeTitle ? 'text-steel-grey' : ''}`}
+                  className={`border-b-2 border-transparent text-2xl font-bold text-ink transition-colors duration-150 group-hover:border-slate-300 motion-reduce:transition-none ${!resumeTitle ? 'text-steel-grey' : ''}`}
                 >
                   {resumeTitle || t('resumeViewer.titlePlaceholder')}
                 </h2>
                 <Pencil
-                  className={`w-4 h-4 transition-opacity ${resumeTitle ? 'opacity-0 group-hover:opacity-60' : 'opacity-40 group-hover:opacity-60'}`}
+                  className={`w-4 h-4 text-steel-grey transition-opacity duration-150 motion-reduce:transition-none ${resumeTitle ? 'opacity-0 group-hover:opacity-60' : 'opacity-40 group-hover:opacity-60'}`}
                 />
               </button>
             )}

@@ -11,6 +11,8 @@ import {
 } from '@/components/ui/dialog';
 import { Button } from '@/components/ui/button';
 import { Textarea } from '@/components/ui/textarea';
+import { Label } from '@/components/ui/label';
+import { Alert } from '@/components/ui/alert';
 import { ArrowLeft, Sparkles, Briefcase, FolderKanban, Lightbulb } from 'lucide-react';
 import { useTranslations } from '@/lib/i18n';
 import type { RegenerateItemInput } from '@/lib/api/enrichment';
@@ -81,34 +83,26 @@ export const RegenerateInstructionDialog: React.FC<RegenerateInstructionDialogPr
 
   return (
     <Dialog open={open} onOpenChange={onOpenChange}>
-      <DialogContent className="sm:max-w-[600px] p-0 gap-0 rounded-none">
-        <DialogHeader className="p-6 pb-4 border-b border-black">
-          <DialogTitle className="font-serif text-xl font-bold uppercase tracking-tight">
-            {t('builder.regenerate.instructionDialog.title')}
-          </DialogTitle>
-          <DialogDescription className="font-mono text-xs text-ink-soft mt-2">
+      <DialogContent className="sm:max-w-[600px] p-0 gap-0">
+        <DialogHeader className="p-6 pb-4 border-b border-border">
+          <DialogTitle>{t('builder.regenerate.instructionDialog.title')}</DialogTitle>
+          <DialogDescription>
             {t('builder.regenerate.instructionDialog.subtitle')}
           </DialogDescription>
         </DialogHeader>
 
-        <div className="p-6 space-y-6">
-          {error ? (
-            <div className="border border-red-600 bg-red-50 px-4 py-3">
-              <p className="font-mono text-xs text-red-700">{resolveErrorMessage(error)}</p>
-            </div>
-          ) : null}
+        <div className="p-6 space-y-5">
+          {error ? <Alert variant="error">{resolveErrorMessage(error)}</Alert> : null}
           {/* Selected Items Summary */}
           <div className="space-y-2">
-            <label className="font-mono text-xs uppercase tracking-wider text-steel-grey">
-              {t('builder.regenerate.instructionDialog.selectedItems')}
-            </label>
-            <div className="bg-paper-tint border border-steel-grey p-3 space-y-2 max-h-32 overflow-y-auto">
+            <Label>{t('builder.regenerate.instructionDialog.selectedItems')}</Label>
+            <div className="max-h-32 space-y-2 overflow-y-auto rounded-lg bg-paper-tint/50 p-3">
               {selectedItems.map((item) => (
                 <div key={item.item_id} className="flex items-center gap-2 text-sm">
                   <span className="text-steel-grey">{getItemIcon(item.item_type)}</span>
-                  <span className="font-medium truncate">{item.title}</span>
+                  <span className="font-medium truncate text-ink">{item.title}</span>
                   {item.subtitle && (
-                    <span className="text-steel-grey text-xs truncate">| {item.subtitle}</span>
+                    <span className="truncate text-xs text-steel-grey">· {item.subtitle}</span>
                   )}
                 </div>
               ))}
@@ -117,12 +111,9 @@ export const RegenerateInstructionDialog: React.FC<RegenerateInstructionDialogPr
 
           {/* Instruction Input */}
           <div className="space-y-2">
-            <label
-              htmlFor="regenerate-instruction"
-              className="font-mono text-xs uppercase tracking-wider text-steel-grey"
-            >
+            <Label htmlFor="regenerate-instruction">
               {t('builder.regenerate.instructionDialog.hint')}
-            </label>
+            </Label>
             <Textarea
               id="regenerate-instruction"
               value={instruction}
@@ -130,23 +121,18 @@ export const RegenerateInstructionDialog: React.FC<RegenerateInstructionDialogPr
               onKeyDown={handleKeyDown}
               maxLength={2000}
               placeholder={t('builder.regenerate.instructionDialog.placeholder')}
-              className="min-h-[120px] border-black"
+              className="min-h-[120px]"
               disabled={isGenerating}
             />
           </div>
         </div>
 
-        <DialogFooter className="p-4 bg-secondary border-t border-black flex-row justify-between gap-3">
-          <Button
-            variant="outline"
-            onClick={onBack}
-            disabled={isGenerating}
-            className="rounded-none border-black"
-          >
-            <ArrowLeft className="w-4 h-4 mr-2" />
+        <DialogFooter className="p-4 bg-paper-tint/40 border-t border-border flex-row justify-between gap-2">
+          <Button variant="outline" onClick={onBack} disabled={isGenerating}>
+            <ArrowLeft className="w-4 h-4" />
             {t('builder.regenerate.instructionDialog.backButton')}
           </Button>
-          <Button onClick={onGenerate} disabled={isGenerating} className="rounded-none">
+          <Button onClick={onGenerate} disabled={isGenerating}>
             {isGenerating ? (
               <>
                 <Sparkles className="w-4 h-4 animate-spin" />

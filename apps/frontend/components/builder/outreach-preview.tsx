@@ -17,26 +17,20 @@ export function OutreachPreview({ content, className }: OutreachPreviewProps) {
   return (
     <div
       className={cn(
-        'bg-white border-2 border-black',
-        'shadow-sw-default',
-        'overflow-hidden',
+        'rounded-xl border border-border bg-white shadow-sw-card overflow-hidden',
         className
       )}
     >
       {/* Preview Header */}
-      <div className="p-4 border-b-2 border-black bg-[#F5F5F0]">
+      <div className="border-b border-border bg-paper-tint/40 p-4">
         <div className="flex items-center gap-4">
           <div className="flex items-center gap-2">
             <Linkedin className="w-4 h-4 text-[#0077B5]" />
-            <span className="font-mono text-xs uppercase">
-              {t('outreach.preview.channels.linkedin')}
-            </span>
+            <span className="text-xs text-ink-soft">{t('outreach.preview.channels.linkedin')}</span>
           </div>
           <div className="flex items-center gap-2">
-            <Mail className="w-4 h-4 text-ink-soft" />
-            <span className="font-mono text-xs uppercase">
-              {t('outreach.preview.channels.email')}
-            </span>
+            <Mail className="w-4 h-4 text-steel-grey" />
+            <span className="text-xs text-ink-soft">{t('outreach.preview.channels.email')}</span>
           </div>
         </div>
       </div>
@@ -46,16 +40,16 @@ export function OutreachPreview({ content, className }: OutreachPreviewProps) {
         {content ? (
           <div className="space-y-4">
             {/* Message Bubble Style */}
-            <div className="bg-[#F5F5F0] border-2 border-black p-4 shadow-sw-sm">
-              <p className="font-sans text-sm leading-relaxed whitespace-pre-wrap">{content}</p>
+            <div className="rounded-xl border border-border bg-paper-tint/40 p-4">
+              <p className="text-sm leading-relaxed whitespace-pre-wrap text-ink-soft">{content}</p>
             </div>
 
             {/* Usage Tips */}
-            <div className="pt-4 border-t border-paper-tint">
-              <p className="font-mono text-xs text-steel-grey uppercase mb-2">
+            <div className="border-t border-border pt-4">
+              <p className="mb-2 text-xs font-semibold text-ink-soft">
                 {t('outreach.preview.howToUseTitle')}
               </p>
-              <ul className="font-mono text-xs text-steel-grey space-y-1">
+              <ul className="space-y-1 text-xs text-steel-grey">
                 <li>{t('outreach.preview.steps.step1')}</li>
                 <li>{t('outreach.preview.steps.step2')}</li>
                 <li>{t('outreach.preview.steps.step3')}</li>
@@ -65,8 +59,8 @@ export function OutreachPreview({ content, className }: OutreachPreviewProps) {
           </div>
         ) : (
           <div className="text-center py-12 text-steel-grey">
-            <p className="font-mono text-sm">{t('outreach.preview.emptyTitle')}</p>
-            <p className="font-mono text-xs mt-2">{t('outreach.preview.emptyDescription')}</p>
+            <p className="text-sm">{t('outreach.preview.emptyTitle')}</p>
+            <p className="text-xs mt-2">{t('outreach.preview.emptyDescription')}</p>
           </div>
         )}
       </div>

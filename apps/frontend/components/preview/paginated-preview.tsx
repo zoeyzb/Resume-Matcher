@@ -108,8 +108,8 @@ export function PaginatedPreview({ resumeData, settings }: PaginatedPreviewProps
   return (
     <div className="flex flex-col h-full overflow-hidden">
       {/* Controls bar */}
-      <div className="flex items-center justify-between px-4 py-2 border-b border-steel-grey bg-secondary shrink-0">
-        <div className="flex items-center gap-2">
+      <div className="flex items-center justify-between border-b border-border bg-paper-tint/40 px-4 py-2 shrink-0">
+        <div className="flex items-center gap-1.5">
           {/* Zoom controls */}
           <Button
             variant="ghost"
@@ -122,7 +122,7 @@ export function PaginatedPreview({ resumeData, settings }: PaginatedPreviewProps
           >
             <ZoomOut className="w-4 h-4" />
           </Button>
-          <span className="font-mono text-xs w-12 text-center text-ink-soft">
+          <span className="w-12 text-center text-xs text-steel-grey">
             {Math.round(zoom * 100)}%
           </span>
           <Button
@@ -137,24 +137,19 @@ export function PaginatedPreview({ resumeData, settings }: PaginatedPreviewProps
             <ZoomIn className="w-4 h-4" />
           </Button>
 
-          <div className="w-px h-5 bg-steel-grey mx-2" />
+          <div className="mx-2 h-5 w-px bg-border" />
 
           {/* Margin toggle */}
-          <Button
-            variant={showMargins ? 'secondary' : 'ghost'}
-            size="sm"
-            onClick={toggleMargins}
-            className="h-8 gap-1.5"
-          >
+          <Button variant={showMargins ? 'secondary' : 'ghost'} size="sm" onClick={toggleMargins}>
             {showMargins ? <Eye className="w-4 h-4" /> : <EyeOff className="w-4 h-4" />}
-            <span className="font-mono text-xs uppercase">{t('preview.margins')}</span>
+            <span className="text-xs">{t('preview.margins')}</span>
           </Button>
         </div>
 
         {/* Page count */}
-        <div className="flex items-center gap-2 text-ink-soft">
+        <div className="flex items-center gap-1.5 text-steel-grey">
           <FileText className="w-4 h-4" />
-          <span className="font-mono text-xs uppercase">
+          <span className="text-xs">
             {isCalculating
               ? t('preview.calculating')
               : pages.length === 1
@@ -165,7 +160,7 @@ export function PaginatedPreview({ resumeData, settings }: PaginatedPreviewProps
       </div>
 
       {/* Scrollable preview area */}
-      <div ref={containerRef} className="flex-1 overflow-auto bg-[#D5D5D0] p-6">
+      <div ref={containerRef} className="flex-1 overflow-auto bg-[#E7E5E4] p-6">
         {/* Hidden measurement container - renders content at actual size */}
         <div
           ref={measurementRef}
@@ -193,11 +188,9 @@ export function PaginatedPreview({ resumeData, settings }: PaginatedPreviewProps
             <React.Fragment key={page.pageNumber}>
               {index > 0 && (
                 <div className="flex items-center gap-2 py-2">
-                  <div className="h-px w-8 bg-steel-grey" />
-                  <span className="font-mono text-[10px] text-steel-grey uppercase tracking-wider">
-                    {t('preview.pageBreak')}
-                  </span>
-                  <div className="h-px w-8 bg-steel-grey" />
+                  <div className="h-px w-8 bg-border" />
+                  <span className="text-[10px] text-steel-grey">{t('preview.pageBreak')}</span>
+                  <div className="h-px w-8 bg-border" />
                 </div>
               )}
               <PageContainer

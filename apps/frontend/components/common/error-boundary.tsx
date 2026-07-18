@@ -67,35 +67,28 @@ export class ErrorBoundary extends Component<Props, State> {
 
       return (
         <div className="min-h-[400px] flex flex-col items-center justify-center p-8 bg-background">
-          <div className="max-w-md w-full bg-white border border-black shadow-sw-default p-8">
-            <div className="flex items-center gap-3 mb-4">
-              <AlertTriangle className="w-8 h-8 text-red-600" />
-              <h2 className="font-serif text-2xl font-bold uppercase">{strings.title}</h2>
+          <div className="w-full max-w-md rounded-2xl border border-border bg-white p-8 shadow-sw-card">
+            <div className="mb-4 flex items-center gap-3">
+              <div className="flex h-11 w-11 shrink-0 items-center justify-center rounded-full bg-red-50">
+                <AlertTriangle className="h-5 w-5 text-red-600" />
+              </div>
+              <h2 className="text-xl font-bold text-ink">{strings.title}</h2>
             </div>
 
-            <p className="text-ink-soft mb-4 font-mono text-sm">{strings.description}</p>
+            <p className="mb-4 text-sm text-steel-grey">{strings.description}</p>
 
             {process.env.NODE_ENV === 'development' && this.state.error && (
-              <div className="mb-4 p-3 bg-red-50 border border-red-200 rounded-none">
-                <p className="font-mono text-xs text-red-700 break-all">
-                  {this.state.error.message}
-                </p>
+              <div className="mb-4 rounded-lg bg-red-50 p-3">
+                <p className="break-all text-xs text-red-700">{this.state.error.message}</p>
               </div>
             )}
 
             <div className="flex gap-3">
-              <Button
-                onClick={this.handleReset}
-                variant="outline"
-                className="flex-1 border-black rounded-none shadow-sw-sm hover:translate-y-[1px] hover:translate-x-[1px] hover:shadow-none transition-all"
-              >
+              <Button onClick={this.handleReset} variant="outline" className="flex-1">
                 {strings.tryAgain}
               </Button>
-              <Button
-                onClick={this.handleReload}
-                className="flex-1 bg-blue-700 hover:bg-blue-800 text-white rounded-none border border-black shadow-sw-sm hover:translate-y-[1px] hover:translate-x-[1px] hover:shadow-none transition-all"
-              >
-                <RefreshCw className="w-4 h-4 mr-2" />
+              <Button onClick={this.handleReload} className="flex-1">
+                <RefreshCw className="w-4 h-4" />
                 {strings.reloadPage}
               </Button>
             </div>

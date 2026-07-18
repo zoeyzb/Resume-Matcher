@@ -80,7 +80,7 @@ export function QuestionStep({
       {/* Progress indicator */}
       <div className="flex items-center justify-between mb-8">
         <div className="flex items-center gap-2">
-          <span className="font-mono text-sm text-steel-grey">
+          <span className="text-sm text-steel-grey">
             {t('enrichment.questionProgress', { current: questionNumber, total: totalQuestions })}
           </span>
         </div>
@@ -88,12 +88,8 @@ export function QuestionStep({
           {Array.from({ length: totalQuestions }).map((_, i) => (
             <div
               key={i}
-              className={`h-1.5 w-6 transition-colors ${
-                i < questionNumber
-                  ? 'bg-black'
-                  : i === questionNumber - 1
-                    ? 'bg-black'
-                    : 'bg-paper-tint'
+              className={`h-1.5 w-6 rounded-full transition-colors duration-150 motion-reduce:transition-none ${
+                i <= questionNumber - 1 ? 'bg-primary' : 'bg-slate-200'
               }`}
             />
           ))}
@@ -103,11 +99,11 @@ export function QuestionStep({
       {/* Item context badge */}
       {item && (
         <div className="mb-6">
-          <div className="inline-flex items-center gap-2 px-3 py-1.5 bg-paper-tint border border-paper-tint text-sm font-mono">
+          <div className="inline-flex items-center gap-2 rounded-full bg-paper-tint px-3 py-1.5 text-sm">
             {item.item_type === 'experience' ? (
-              <Briefcase className="w-4 h-4 text-ink-soft" />
+              <Briefcase className="w-4 h-4 text-steel-grey" />
             ) : (
-              <FolderKanban className="w-4 h-4 text-ink-soft" />
+              <FolderKanban className="w-4 h-4 text-steel-grey" />
             )}
             <span className="text-ink-soft">
               {item.item_type === 'experience'
@@ -123,27 +119,27 @@ export function QuestionStep({
 
       {/* Question */}
       <div className="flex-1">
-        <h2 className="text-2xl font-bold mb-6 leading-tight">{question.question}</h2>
+        <h2 className="text-2xl font-bold mb-6 leading-tight text-ink">{question.question}</h2>
 
         <Textarea
           ref={textareaRef}
           value={localAnswer}
           onChange={(e) => handleChange(e.target.value)}
           placeholder={question.placeholder}
-          className="min-h-[180px] text-base resize-none font-mono"
+          className="min-h-[180px] text-base resize-none"
         />
 
-        <p className="text-xs text-steel-grey mt-2 font-mono">{t('enrichment.shortcutHint')}</p>
+        <p className="text-xs text-steel-grey mt-2">{t('enrichment.shortcutHint')}</p>
       </div>
 
       {/* Navigation */}
-      <div className="flex items-center justify-between pt-6 border-t border-paper-tint mt-6">
-        <Button variant="outline" onClick={onPrev} disabled={isFirst} className="gap-2">
+      <div className="flex items-center justify-between pt-6 border-t border-border mt-6">
+        <Button variant="outline" onClick={onPrev} disabled={isFirst}>
           <ChevronLeft className="w-4 h-4" />
           {t('common.back')}
         </Button>
 
-        <Button onClick={handleContinue} className="gap-2">
+        <Button onClick={handleContinue}>
           {isLast ? (
             <>
               {t('common.finish')}

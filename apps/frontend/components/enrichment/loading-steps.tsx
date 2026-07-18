@@ -11,13 +11,11 @@ interface LoadingStepProps {
 
 function LoadingStep({ message, submessage }: LoadingStepProps) {
   return (
-    <div className="flex flex-col items-center justify-center h-full min-h-[400px] gap-6">
-      <div className="relative">
-        <Loader2 className="w-12 h-12 animate-spin text-black" />
-      </div>
+    <div className="flex flex-col items-center justify-center h-full min-h-[400px] gap-5">
+      <Loader2 className="w-9 h-9 animate-spin text-primary" />
       <div className="text-center">
-        <p className="text-xl font-mono font-bold">{message}</p>
-        {submessage && <p className="text-sm text-steel-grey mt-2 font-mono">{submessage}</p>}
+        <p className="text-lg font-semibold text-ink">{message}</p>
+        {submessage && <p className="text-sm text-steel-grey mt-1.5">{submessage}</p>}
       </div>
     </div>
   );
@@ -62,13 +60,13 @@ export function CompleteStep({ onClose, updatedCount }: CompleteStepProps) {
   const { t } = useTranslations();
   const hasUpdatedCount = updatedCount !== undefined;
   return (
-    <div className="flex flex-col items-center justify-center h-full min-h-[400px] gap-6">
-      <div className="relative">
-        <CheckCircle2 className="w-16 h-16 text-green-600" />
+    <div className="flex flex-col items-center justify-center h-full min-h-[400px] gap-5">
+      <div className="flex h-14 w-14 items-center justify-center rounded-full bg-emerald-50">
+        <CheckCircle2 className="w-7 h-7 text-emerald-600" />
       </div>
       <div className="text-center">
-        <p className="text-2xl font-mono font-bold">{t('enrichment.complete.title')}</p>
-        <p className="text-sm text-steel-grey mt-2 font-mono">
+        <p className="text-xl font-bold text-ink">{t('enrichment.complete.title')}</p>
+        <p className="text-sm text-steel-grey mt-1.5">
           {hasUpdatedCount
             ? updatedCount === 1
               ? t('enrichment.complete.updatedCountSingular', { count: updatedCount })
@@ -76,7 +74,7 @@ export function CompleteStep({ onClose, updatedCount }: CompleteStepProps) {
             : t('enrichment.complete.updatedFallback')}
         </p>
       </div>
-      <Button onClick={onClose} className="mt-4 gap-2">
+      <Button onClick={onClose} className="mt-2">
         <Sparkles className="w-4 h-4" />
         {t('enrichment.complete.doneButton')}
       </Button>
@@ -92,17 +90,17 @@ interface NoImprovementsStepProps {
 export function NoImprovementsStep({ onClose, summary }: NoImprovementsStepProps) {
   const { t } = useTranslations();
   return (
-    <div className="flex flex-col items-center justify-center h-full min-h-[400px] gap-6">
-      <div className="relative">
-        <CheckCircle2 className="w-16 h-16 text-green-600" />
+    <div className="flex flex-col items-center justify-center h-full min-h-[400px] gap-5">
+      <div className="flex h-14 w-14 items-center justify-center rounded-full bg-emerald-50">
+        <CheckCircle2 className="w-7 h-7 text-emerald-600" />
       </div>
-      <div className="text-center max-w-md">
-        <p className="text-2xl font-mono font-bold">{t('enrichment.noImprovements.title')}</p>
-        <p className="text-sm text-steel-grey mt-2 font-mono">
+      <div className="max-w-md text-center">
+        <p className="text-xl font-bold text-ink">{t('enrichment.noImprovements.title')}</p>
+        <p className="text-sm text-steel-grey mt-1.5">
           {summary || t('enrichment.noImprovements.defaultDescription')}
         </p>
       </div>
-      <Button onClick={onClose} className="mt-4 gap-2">
+      <Button onClick={onClose} className="mt-2">
         <Sparkles className="w-4 h-4" />
         {t('common.close')}
       </Button>
@@ -119,17 +117,15 @@ interface ErrorStepProps {
 export function ErrorStep({ error, onRetry, onClose }: ErrorStepProps) {
   const { t } = useTranslations();
   return (
-    <div className="flex flex-col items-center justify-center h-full min-h-[400px] gap-6">
-      <div className="relative">
-        <AlertCircle className="w-16 h-16 text-red-500" />
+    <div className="flex flex-col items-center justify-center h-full min-h-[400px] gap-5">
+      <div className="flex h-14 w-14 items-center justify-center rounded-full bg-red-50">
+        <AlertCircle className="w-7 h-7 text-red-600" />
       </div>
-      <div className="text-center max-w-md">
-        <p className="text-xl font-mono font-bold">{t('enrichment.error.title')}</p>
-        <p className="text-sm text-red-600 mt-2 font-mono bg-red-50 p-3 border border-red-200">
-          {error}
-        </p>
+      <div className="max-w-md text-center">
+        <p className="text-lg font-semibold text-ink">{t('enrichment.error.title')}</p>
+        <p className="mt-2 rounded-lg bg-red-50 p-3 text-sm text-red-700">{error}</p>
       </div>
-      <div className="flex gap-3 mt-4">
+      <div className="flex gap-2 mt-2">
         <Button variant="outline" onClick={onClose}>
           {t('common.cancel')}
         </Button>

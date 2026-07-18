@@ -15,6 +15,7 @@ import {
 import { Button } from '@/components/ui/button';
 import { Textarea } from '@/components/ui/textarea';
 import { Label } from '@/components/ui/label';
+import { Badge } from '@/components/ui/badge';
 import { useTranslations } from '@/lib/i18n';
 import { getApplicationDetail, updateApplication, type ApplicationDetail } from '@/lib/api/tracker';
 
@@ -101,10 +102,8 @@ export function CardDetailModal({
           </div>
         ) : detail ? (
           <div className="space-y-4">
-            <div className="flex items-center gap-2 font-mono text-xs uppercase text-ink-soft">
-              <span className="border border-black bg-paper-tint px-2 py-0.5">
-                {t(`tracker.columns.${detail.status}`)}
-              </span>
+            <div className="flex items-center gap-2 text-sm text-ink-soft">
+              <Badge variant="primary">{t(`tracker.columns.${detail.status}`)}</Badge>
               {detail.applied_at && (
                 <span>
                   {new Date(detail.applied_at).toLocaleDateString('en-US', {
@@ -115,9 +114,9 @@ export function CardDetailModal({
               )}
             </div>
 
-            <div className="space-y-1">
+            <div className="space-y-1.5">
               <Label>{t('tracker.modal.jobDescription')}</Label>
-              <div className="max-h-48 overflow-y-auto whitespace-pre-wrap border border-black bg-background p-3 text-sm">
+              <div className="max-h-48 overflow-y-auto whitespace-pre-wrap rounded-lg border border-border bg-paper-tint/40 p-3 text-sm text-ink-soft">
                 {detail.job_content || t('tracker.modal.noJobDescription')}
               </div>
             </div>
@@ -133,9 +132,7 @@ export function CardDetailModal({
                 rows={3}
               />
               <div className="flex items-center justify-end gap-3">
-                {notesError && (
-                  <span className="font-mono text-xs text-destructive">{notesError}</span>
-                )}
+                {notesError && <span className="text-xs text-destructive">{notesError}</span>}
                 <Button
                   size="sm"
                   variant="outline"
@@ -152,13 +149,11 @@ export function CardDetailModal({
             </div>
 
             {!resumeAvailable && (
-              <p className="font-mono text-xs text-warning">
-                {t('tracker.modal.resumeUnavailable')}
-              </p>
+              <p className="text-xs text-warning">{t('tracker.modal.resumeUnavailable')}</p>
             )}
           </div>
         ) : (
-          <p className="py-6 text-center font-mono text-sm text-steel-grey">
+          <p className="py-6 text-center text-sm text-steel-grey">
             {t('tracker.modal.loadFailed')}
           </p>
         )}

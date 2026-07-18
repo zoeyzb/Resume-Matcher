@@ -17,9 +17,9 @@ export function JDDisplay({ content }: JDDisplayProps) {
   return (
     <div className="h-full flex flex-col">
       {/* Header */}
-      <div className="flex items-center gap-2 p-4 border-b border-paper-tint bg-paper-tint">
-        <FileText className="w-4 h-4 text-ink-soft" />
-        <h3 className="font-mono text-sm font-bold uppercase text-ink-soft">
+      <div className="flex items-center gap-2 border-b border-border bg-paper-tint/40 p-4">
+        <FileText className="w-4 h-4 text-steel-grey" />
+        <h3 className="text-sm font-semibold text-ink">
           {t('builder.jdMatch.jobDescriptionTitle')}
         </h3>
       </div>

@@ -1,6 +1,9 @@
 'use client';
 
 import * as React from 'react';
+import AlertTriangle from 'lucide-react/dist/esm/icons/alert-triangle';
+import CheckCircle2 from 'lucide-react/dist/esm/icons/check-circle-2';
+import HelpCircle from 'lucide-react/dist/esm/icons/help-circle';
 import {
   Dialog,
   DialogContent,
@@ -13,13 +16,11 @@ import { Button } from './button';
 import { useTranslations } from '@/lib/i18n';
 
 /**
- * Swiss International Style Confirm Dialog Component
- *
- * A modal dialog for confirming user actions with semantic variants:
- * - danger: Destructive actions (delete, remove)
- * - warning: Caution actions (reset, overwrite)
- * - success: Positive confirmations
- * - default: Neutral confirmations
+ * Confirmation dialog with semantic variants:
+ * - danger: destructive actions (delete, remove)
+ * - warning: caution actions (reset, overwrite)
+ * - success: positive confirmations
+ * - default: neutral confirmations
  */
 
 export interface ConfirmDialogProps {
@@ -73,32 +74,32 @@ export const ConfirmDialog: React.FC<ConfirmDialogProps> = ({
   const variantStyles = {
     danger: {
       icon: (
-        <div className="w-12 h-12 border-2 border-red-600 bg-red-50 flex items-center justify-center">
-          <span className="text-red-600 text-2xl font-bold">!</span>
+        <div className="flex h-11 w-11 shrink-0 items-center justify-center rounded-full bg-red-50 text-red-600">
+          <AlertTriangle className="h-5 w-5" />
         </div>
       ),
       buttonVariant: 'destructive' as const,
     },
     warning: {
       icon: (
-        <div className="w-12 h-12 border-2 border-orange-500 bg-orange-50 flex items-center justify-center">
-          <span className="text-orange-500 text-2xl font-bold">!</span>
+        <div className="flex h-11 w-11 shrink-0 items-center justify-center rounded-full bg-amber-50 text-amber-600">
+          <AlertTriangle className="h-5 w-5" />
         </div>
       ),
       buttonVariant: 'warning' as const,
     },
     success: {
       icon: (
-        <div className="w-12 h-12 border-2 border-green-700 bg-green-50 flex items-center justify-center">
-          <span className="text-green-700 text-2xl font-bold">&#10003;</span>
+        <div className="flex h-11 w-11 shrink-0 items-center justify-center rounded-full bg-emerald-50 text-emerald-600">
+          <CheckCircle2 className="h-5 w-5" />
         </div>
       ),
       buttonVariant: 'success' as const,
     },
     default: {
       icon: (
-        <div className="w-12 h-12 border-2 border-blue-700 bg-blue-50 flex items-center justify-center">
-          <span className="text-blue-700 text-2xl font-bold">?</span>
+        <div className="flex h-11 w-11 shrink-0 items-center justify-center rounded-full bg-indigo-50 text-primary">
+          <HelpCircle className="h-5 w-5" />
         </div>
       ),
       buttonVariant: 'default' as const,
@@ -109,15 +110,13 @@ export const ConfirmDialog: React.FC<ConfirmDialogProps> = ({
 
   return (
     <Dialog open={open} onOpenChange={onOpenChange}>
-      <DialogContent className="sm:max-w-[425px] p-0 gap-0">
+      <DialogContent className="sm:max-w-[440px] p-0 gap-0">
         <DialogHeader className="p-6 pb-4">
           <div className="flex items-start gap-4">
             {icon}
-            <div className="flex-1">
-              <DialogTitle className="font-serif text-xl font-bold uppercase tracking-tight">
-                {title}
-              </DialogTitle>
-              <DialogDescription className="font-mono text-xs text-ink-soft mt-2 max-h-60 overflow-y-auto whitespace-pre-wrap [overflow-wrap:anywhere]">
+            <div className="flex-1 pt-1">
+              <DialogTitle>{title}</DialogTitle>
+              <DialogDescription className="mt-1.5 max-h-60 overflow-y-auto whitespace-pre-wrap [overflow-wrap:anywhere]">
                 {description}
               </DialogDescription>
             </div>
@@ -125,23 +124,18 @@ export const ConfirmDialog: React.FC<ConfirmDialogProps> = ({
         </DialogHeader>
         {errorMessage && (
           <div className="px-6 pb-4">
-            <div className="border-2 border-red-600 bg-red-50 p-3 font-mono text-xs text-red-700 max-h-60 overflow-y-auto whitespace-pre-wrap [overflow-wrap:anywhere]">
+            <div className="rounded-lg border border-red-200 bg-red-50 p-3 text-xs text-red-700 max-h-60 overflow-y-auto whitespace-pre-wrap [overflow-wrap:anywhere]">
               {errorMessage}
             </div>
           </div>
         )}
-        <DialogFooter className="p-4 bg-secondary border-t border-black flex-row justify-end gap-3">
+        <DialogFooter className="rounded-b-2xl bg-paper-tint/60 p-4 flex-row justify-end gap-2 border-t border-border">
           {showCancelButton && (
-            <Button variant="outline" onClick={handleCancel} className="rounded-none border-black">
+            <Button variant="outline" onClick={handleCancel}>
               {finalCancelLabel}
             </Button>
           )}
-          <Button
-            variant={buttonVariant}
-            onClick={handleConfirm}
-            className="rounded-none"
-            disabled={confirmDisabled}
-          >
+          <Button variant={buttonVariant} onClick={handleConfirm} disabled={confirmDisabled}>
             {finalConfirmLabel}
           </Button>
         </DialogFooter>

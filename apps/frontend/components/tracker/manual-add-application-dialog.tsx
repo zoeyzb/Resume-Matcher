@@ -154,7 +154,7 @@ export function ManualAddApplicationDialog({
             />
           </div>
 
-          {error && <p className="font-mono text-xs text-destructive">{error}</p>}
+          {error && <p className="text-xs text-destructive">{error}</p>}
         </div>
 
         <DialogFooter>

@@ -65,9 +65,9 @@ export function QuestionCard({
   };
 
   return (
-    <section className="border-2 border-black bg-white shadow-sw-lg">
+    <section className="rounded-2xl border border-border bg-white shadow-sw-card">
       <div
-        className="flex gap-1 border-b-2 border-black p-2"
+        className="flex gap-1 border-b border-border p-4 pb-3"
         role="progressbar"
         aria-valuemin={0}
         aria-valuemax={totalSegments}
@@ -78,27 +78,22 @@ export function QuestionCard({
             key={index}
             className={
               index < progress.current
-                ? 'h-1.5 flex-1 border border-black bg-black'
-                : 'h-1.5 flex-1 border border-black bg-white'
+                ? 'h-1.5 flex-1 rounded-full bg-primary'
+                : 'h-1.5 flex-1 rounded-full bg-slate-200'
             }
           />
         ))}
       </div>
 
       <div className="grid gap-6 p-5 md:p-8">
-        <p className="font-mono text-xs font-bold uppercase tracking-wider text-blue-700">
-          {sectionLabel}
-        </p>
-        <h2 className="font-serif text-3xl font-bold leading-tight md:text-4xl">{question}</h2>
+        <p className="text-xs font-semibold text-primary">{sectionLabel}</p>
+        <h2 className="text-3xl font-bold leading-tight text-ink md:text-4xl">{question}</h2>
 
         {isReview ? (
           warnings.length > 0 && (
             <ul className="grid gap-2">
               {warnings.map((warning, index) => (
-                <li
-                  key={index}
-                  className="border border-steel-grey bg-white px-3 py-2 font-sans text-sm text-steel-grey"
-                >
+                <li key={index} className="rounded-lg bg-amber-50 px-3 py-2 text-sm text-amber-800">
                   {warning}
                 </li>
               ))}
@@ -106,10 +101,7 @@ export function QuestionCard({
           )
         ) : (
           <div className="grid gap-2">
-            <label
-              htmlFor="resume-wizard-answer"
-              className="font-mono text-xs font-bold uppercase tracking-wider text-steel-grey"
-            >
+            <label htmlFor="resume-wizard-answer" className="text-sm font-medium text-ink-soft">
               {t('resumeWizard.answerLabel')}
             </label>
             <Textarea
@@ -118,19 +110,22 @@ export function QuestionCard({
               onChange={(event) => onAnswerChange(event.target.value)}
               onKeyDown={handleKeyDown}
               disabled={isBusy}
-              className="min-h-40 bg-white font-sans text-base"
+              className="min-h-40 text-base"
             />
           </div>
         )}
 
         {isQuestion && isComplete && (
-          <p className="flex items-center gap-2 font-mono text-xs font-bold uppercase tracking-wider text-green-700">
-            <span aria-hidden="true" className="inline-block h-3 w-3 bg-green-700" />
+          <p className="flex items-center gap-2 text-xs font-semibold text-emerald-700">
+            <span
+              aria-hidden="true"
+              className="inline-block h-1.5 w-1.5 rounded-full bg-emerald-600"
+            />
             {t('resumeWizard.readyHint')}
           </p>
         )}
 
-        <div className="flex flex-wrap gap-3 border-t-2 border-black pt-5">
+        <div className="flex flex-wrap gap-3 border-t border-border pt-5">
           {isReview ? (
             <>
               <Button

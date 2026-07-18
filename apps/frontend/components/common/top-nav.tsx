@@ -19,7 +19,6 @@ const NAV_ITEMS = [
   { href: '/builder', labelKey: 'nav.builder' },
   { href: '/tailor', labelKey: 'nav.tailor' },
   { href: '/tracker', labelKey: 'nav.tracker' },
-  { href: '/settings', labelKey: 'nav.settings' },
 ] as const;
 
 export function TopNav() {
@@ -27,7 +26,6 @@ export function TopNav() {
   const { t } = useTranslations();
   const [mobileOpen, setMobileOpen] = useState(false);
 
-  // Close the drawer whenever the route changes (e.g. a link was followed).
   useEffect(() => {
     setMobileOpen(false);
   }, [pathname]);
@@ -51,23 +49,26 @@ export function TopNav() {
 
   const isActive = (href: string) =>
     pathname === href || (pathname?.startsWith(`${href}/`) ?? false);
+  const settingsActive = isActive('/settings');
 
   return (
-    <header className="relative z-40 shrink-0 border-b-2 border-black bg-canvas">
-      <div className="flex h-14 items-center justify-between gap-4 px-4 md:px-8">
+    <header className="relative z-40 shrink-0 border-b border-border bg-white/90 backdrop-blur-sm">
+      <div className="flex h-14 items-center justify-between gap-4 px-4 md:px-6">
         <Link
           href="/dashboard"
-          className="flex items-center gap-2 font-mono text-sm font-bold uppercase tracking-wider focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-blue-700 focus-visible:ring-offset-2"
+          className="flex items-center gap-2 rounded-lg focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary focus-visible:ring-offset-2"
         >
           <Image
             src="/logo.svg"
             alt=""
-            width={20}
-            height={20}
-            className="h-5 w-5 shrink-0"
+            width={22}
+            height={22}
+            className="h-[22px] w-[22px] shrink-0"
             aria-hidden="true"
           />
-          <span className="sr-only sm:not-sr-only">Resume Matcher</span>
+          <span className="sr-only sm:not-sr-only text-[15px] font-bold tracking-tight text-ink">
+            Resume Matcher
+          </span>
         </Link>
 
         {/* Desktop nav */}
@@ -80,11 +81,10 @@ export function TopNav() {
                 href={item.href}
                 aria-current={active ? 'page' : undefined}
                 className={cn(
-                  'border border-transparent px-3 py-2 font-mono text-xs font-bold uppercase tracking-wider',
-                  'transition-colors duration-100 motion-reduce:transition-none',
-                  'focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-blue-700 focus-visible:ring-offset-2',
+                  'rounded-lg px-3 py-2 text-sm font-medium transition-colors duration-150 motion-reduce:transition-none',
+                  'focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary focus-visible:ring-offset-2',
                   active
-                    ? 'border-black bg-blue-700 text-white'
+                    ? 'bg-accent text-primary'
                     : 'text-ink-soft hover:bg-paper-tint hover:text-ink'
                 )}
               >
@@ -94,6 +94,24 @@ export function TopNav() {
           })}
         </nav>
 
+        {/* Settings sits apart from the core workflow tabs so it doesn't
+            compete for attention with the primary navigation. */}
+        <div className="hidden items-center gap-2 md:flex">
+          <Link
+            href="/settings"
+            aria-current={settingsActive ? 'page' : undefined}
+            className={cn(
+              'rounded-lg px-3 py-2 text-sm font-medium transition-colors duration-150 motion-reduce:transition-none',
+              'focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary focus-visible:ring-offset-2',
+              settingsActive
+                ? 'bg-accent text-primary'
+                : 'text-steel-grey hover:bg-paper-tint hover:text-ink'
+            )}
+          >
+            {t('nav.settings')}
+          </Link>
+        </div>
+
         {/* Mobile toggle */}
         <button
           type="button"
@@ -102,9 +120,9 @@ export function TopNav() {
           aria-controls="mobile-nav-drawer"
           aria-label={mobileOpen ? t('nav.closeMenu') : t('nav.openMenu')}
           className={cn(
-            'inline-flex h-11 w-11 items-center justify-center border border-black bg-white md:hidden',
-            'shadow-sw-sm hover:translate-y-[1px] hover:translate-x-[1px] hover:shadow-none',
-            'focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-blue-700 focus-visible:ring-offset-2'
+            'inline-flex h-10 w-10 items-center justify-center rounded-lg border border-border bg-white text-ink-soft md:hidden',
+            'transition-colors duration-150 motion-reduce:transition-none hover:bg-paper-tint',
+            'focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary focus-visible:ring-offset-2'
           )}
         >
           {mobileOpen ? <X className="h-5 w-5" /> : <Menu className="h-5 w-5" />}
@@ -115,29 +133,31 @@ export function TopNav() {
       {mobileOpen && (
         <nav
           id="mobile-nav-drawer"
-          className="border-t-2 border-black bg-canvas motion-safe:animate-in motion-safe:fade-in-0 motion-safe:slide-in-from-top-2 motion-safe:duration-150 md:hidden"
+          className="border-t border-border bg-white shadow-sw-lg motion-safe:animate-in motion-safe:fade-in-0 motion-safe:slide-in-from-top-2 motion-safe:duration-150 md:hidden"
         >
-          <ul className="flex flex-col divide-y divide-black/10">
-            {NAV_ITEMS.map((item) => {
-              const active = isActive(item.href);
-              return (
-                <li key={item.href}>
-                  <Link
-                    href={item.href}
-                    aria-current={active ? 'page' : undefined}
-                    className={cn(
-                      'flex items-center px-4 py-3 font-mono text-sm font-bold uppercase tracking-wider',
-                      'focus-visible:outline-none focus-visible:-outline-offset-2 focus-visible:outline-2 focus-visible:outline-blue-700',
-                      active
-                        ? 'bg-blue-700 text-white'
-                        : 'text-ink-soft hover:bg-paper-tint hover:text-ink'
-                    )}
-                  >
-                    {t(item.labelKey)}
-                  </Link>
-                </li>
-              );
-            })}
+          <ul className="flex flex-col gap-1 p-2">
+            {[...NAV_ITEMS, { href: '/settings', labelKey: 'nav.settings' } as const].map(
+              (item) => {
+                const active = isActive(item.href);
+                return (
+                  <li key={item.href}>
+                    <Link
+                      href={item.href}
+                      aria-current={active ? 'page' : undefined}
+                      className={cn(
+                        'flex min-h-[44px] items-center rounded-lg px-3.5 text-[15px] font-medium',
+                        'focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary focus-visible:ring-inset',
+                        active
+                          ? 'bg-accent text-primary'
+                          : 'text-ink-soft hover:bg-paper-tint hover:text-ink'
+                      )}
+                    >
+                      {t(item.labelKey)}
+                    </Link>
+                  </li>
+                );
+              }
+            )}
           </ul>
         </nav>
       )}

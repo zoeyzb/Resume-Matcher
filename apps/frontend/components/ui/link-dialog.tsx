@@ -112,54 +112,48 @@ export const LinkDialog: React.FC<LinkDialogProps> = ({ editor, onClose }) => {
   return (
     <div className="fixed inset-0 z-50">
       {/* Overlay */}
-      <div className="fixed inset-0 bg-black/50" onClick={onClose} />
+      <div className="fixed inset-0 bg-slate-900/50" onClick={onClose} />
 
       {/* Dialog */}
       <div className="fixed inset-0 flex items-center justify-center p-4">
         <div
-          className="relative w-full max-w-md border-2 border-black bg-white shadow-sw-default p-6"
+          className="relative w-full max-w-md rounded-2xl border border-border bg-white p-6 shadow-sw-xl"
           onClick={(e) => e.stopPropagation()}
         >
           {/* Close button */}
           <button
             onClick={onClose}
-            className="absolute right-4 top-4 opacity-70 transition-opacity hover:opacity-100"
+            className="absolute right-4 top-4 flex h-8 w-8 cursor-pointer items-center justify-center rounded-lg text-steel-grey transition-colors duration-150 hover:bg-paper-tint hover:text-ink motion-reduce:transition-none"
           >
-            <X className="h-5 w-5" />
+            <X className="h-4 w-4" />
           </button>
 
           {/* Title */}
-          <h3 className="font-mono text-xs uppercase tracking-wider mb-4 text-ink-soft">
-            [ {hasExistingLink ? 'EDIT LINK' : 'ADD LINK'} ]
+          <h3 className="mb-4 text-base font-semibold text-ink">
+            {hasExistingLink ? 'Edit link' : 'Add link'}
           </h3>
 
           <form onSubmit={handleSubmit} className="space-y-4">
             {/* Display Text */}
             <div className="space-y-2">
-              <Label htmlFor="link-text" className="font-mono text-xs uppercase tracking-wider">
-                Display Text
-              </Label>
+              <Label htmlFor="link-text">Display Text</Label>
               <Input
                 id="link-text"
                 value={text}
                 onChange={(e) => setText(e.target.value)}
                 placeholder="Link text"
-                className="rounded-none border-black bg-white"
                 autoFocus
               />
             </div>
 
             {/* URL */}
             <div className="space-y-2">
-              <Label htmlFor="link-url" className="font-mono text-xs uppercase tracking-wider">
-                URL
-              </Label>
+              <Label htmlFor="link-url">URL</Label>
               <Input
                 id="link-url"
                 value={url}
                 onChange={(e) => setUrl(e.target.value)}
                 placeholder="https://example.com"
-                className="rounded-none border-black bg-white"
               />
             </div>
 

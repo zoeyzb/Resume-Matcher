@@ -36,12 +36,10 @@ export function HighlightedResumeView({ resumeData, keywords }: HighlightedResum
   return (
     <div className="h-full flex flex-col">
       {/* Header */}
-      <div className="flex items-center gap-2 p-4 border-b border-paper-tint bg-paper-tint">
-        <FileUser className="w-4 h-4 text-ink-soft" />
-        <h3 className="font-mono text-sm font-bold uppercase text-ink-soft">
-          {t('builder.jdMatch.yourResume')}
-        </h3>
-        <span className="text-xs text-steel-grey ml-2">
+      <div className="flex flex-wrap items-center gap-2 border-b border-border bg-paper-tint/40 p-4">
+        <FileUser className="w-4 h-4 text-steel-grey" />
+        <h3 className="text-sm font-semibold text-ink">{t('builder.jdMatch.yourResume')}</h3>
+        <span className="ml-1 text-xs text-steel-grey">
           {t('builder.jdMatch.matchingKeywordsHighlighted')}
         </span>
       </div>
@@ -144,7 +142,7 @@ export function HighlightedResumeView({ resumeData, keywords }: HighlightedResum
           <Section title={t('resume.sections.skills')} icon={<Wrench className="w-4 h-4" />}>
             {visibleTechnicalSkills.length > 0 && (
               <div className="mb-3">
-                <div className="text-xs font-mono uppercase text-steel-grey mb-1">
+                <div className="text-xs font-semibold text-steel-grey mb-1">
                   {t('resume.additional.technicalSkills')}
                 </div>
                 <div className="flex flex-wrap gap-1">
@@ -157,7 +155,7 @@ export function HighlightedResumeView({ resumeData, keywords }: HighlightedResum
 
             {visibleLanguages.length > 0 && (
               <div className="mb-3">
-                <div className="text-xs font-mono uppercase text-steel-grey mb-1">
+                <div className="text-xs font-semibold text-steel-grey mb-1">
                   {t('resume.sections.languages')}
                 </div>
                 <div className="flex flex-wrap gap-1">
@@ -170,7 +168,7 @@ export function HighlightedResumeView({ resumeData, keywords }: HighlightedResum
 
             {visibleCertificationsTraining.length > 0 && (
               <div className="mb-3">
-                <div className="text-xs font-mono uppercase text-steel-grey mb-1">
+                <div className="text-xs font-semibold text-steel-grey mb-1">
                   {t('resume.sections.certifications')}
                 </div>
                 <ul className="list-disc list-inside space-y-1 text-sm">
@@ -202,10 +200,10 @@ function Section({
   children: React.ReactNode;
 }) {
   return (
-    <div className="border border-paper-tint bg-white rounded-none">
-      <div className="flex items-center gap-2 px-3 py-2 border-b border-paper-tint bg-paper-tint">
+    <div className="rounded-xl border border-border bg-white">
+      <div className="flex items-center gap-2 border-b border-border bg-paper-tint/40 px-3 py-2.5">
         {icon}
-        <span className="font-mono text-xs font-bold uppercase text-ink-soft">{title}</span>
+        <span className="text-xs font-semibold text-ink">{title}</span>
       </div>
       <div className="p-3">{children}</div>
     </div>
@@ -241,8 +239,8 @@ function SkillTag({ text, keywords }: { text: string; keywords: Set<string> }) {
 
   return (
     <span
-      className={`inline-block px-2 py-0.5 text-xs ${
-        isMatch ? 'bg-yellow-200 text-black font-medium' : 'bg-background text-ink-soft'
+      className={`inline-block rounded-full px-2.5 py-0.5 text-xs ${
+        isMatch ? 'bg-yellow-200 text-black font-medium' : 'bg-paper-tint text-ink-soft'
       }`}
     >
       {text}

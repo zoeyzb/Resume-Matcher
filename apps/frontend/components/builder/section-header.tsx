@@ -3,6 +3,7 @@
 import React, { useState } from 'react';
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
+import { Badge } from '@/components/ui/badge';
 import { ConfirmDialog } from '@/components/ui/confirm-dialog';
 import { ChevronUp, ChevronDown, Trash2, Eye, EyeOff, Pencil, Check, X } from 'lucide-react';
 import type { SectionMeta } from '@/components/dashboard/resume-component';
@@ -87,12 +88,12 @@ export const SectionHeader: React.FC<SectionHeaderProps> = ({
 
   return (
     <div
-      className={`space-y-0 border p-6 bg-white shadow-sw-default ${
-        isHidden ? 'border-dashed border-steel-grey opacity-60' : 'border-black'
+      className={`space-y-0 rounded-xl border p-6 bg-white shadow-sw-xs ${
+        isHidden ? 'border-dashed border-slate-300 opacity-60' : 'border-border'
       }`}
     >
       {/* Section Header */}
-      <div className="flex justify-between items-center border-b border-black pb-2 mb-4">
+      <div className="flex justify-between items-center border-b border-border pb-3 mb-4">
         {/* Section Name (editable) */}
         <div className="flex items-center gap-2">
           {isEditing ? (
@@ -101,7 +102,7 @@ export const SectionHeader: React.FC<SectionHeaderProps> = ({
                 value={editedName}
                 onChange={(e) => setEditedName(e.target.value)}
                 onKeyDown={handleKeyDown}
-                className="h-8 w-48 rounded-none border-black font-serif text-lg font-bold"
+                className="h-8 w-48 text-base font-semibold"
                 autoFocus
               />
               <Button
@@ -127,7 +128,7 @@ export const SectionHeader: React.FC<SectionHeaderProps> = ({
             </div>
           ) : (
             <>
-              <h3 className="font-serif text-xl font-bold">{section.displayName}</h3>
+              <h3 className="text-lg font-semibold text-ink">{section.displayName}</h3>
               {!isPersonalInfo && (
                 <Button
                   variant="ghost"
@@ -146,14 +147,10 @@ export const SectionHeader: React.FC<SectionHeaderProps> = ({
                 </Button>
               )}
               {!section.isDefault && (
-                <span className="font-mono text-[10px] uppercase tracking-wider text-steel-grey bg-paper-tint px-1.5 py-0.5 border border-paper-tint">
-                  {t('builder.sectionHeader.customTag')}
-                </span>
+                <Badge variant="neutral">{t('builder.sectionHeader.customTag')}</Badge>
               )}
               {isHidden && (
-                <span className="font-mono text-[10px] uppercase tracking-wider text-orange-600 bg-white px-1.5 py-0.5 border border-orange-500">
-                  {t('builder.sectionHeader.hiddenFromPdfTag')}
-                </span>
+                <Badge variant="warning">{t('builder.sectionHeader.hiddenFromPdfTag')}</Badge>
               )}
             </>
           )}

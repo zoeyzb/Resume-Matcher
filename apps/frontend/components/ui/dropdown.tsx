@@ -1,8 +1,10 @@
 'use client';
 
 import React, { useState, useRef, useEffect } from 'react';
-import { ChevronDown } from 'lucide-react';
+import ChevronDown from 'lucide-react/dist/esm/icons/chevron-down';
+import Check from 'lucide-react/dist/esm/icons/check';
 import { useTranslations } from '@/lib/i18n';
+import { cn } from '@/lib/utils';
 
 export interface DropdownOption {
   id: string;
@@ -33,13 +35,10 @@ export function Dropdown({
   const [isOpen, setIsOpen] = useState(false);
   const containerRef = useRef<HTMLDivElement>(null);
   const buttonRef = useRef<HTMLButtonElement>(null);
-  // Stable id wiring the trigger's aria-controls to the popup's id, and
-  // the popup's role="menu" to its role="menuitem" children.
   const menuId = React.useId();
 
   const selectedOption = options.find((opt) => opt.id === value);
 
-  // Close dropdown on outside click
   useEffect(() => {
     function handleClickOutside(event: MouseEvent) {
       if (containerRef.current && !containerRef.current.contains(event.target as Node)) {
@@ -59,21 +58,12 @@ export function Dropdown({
   };
 
   return (
-    <div className={`space-y-1 ${className}`} ref={containerRef}>
-      {label && (
-        <label className="font-mono text-xs font-bold uppercase tracking-wider text-ink-soft block">
-          {label}
-        </label>
-      )}
+    <div className={`space-y-1.5 ${className}`} ref={containerRef}>
+      {label && <label className="block text-sm font-medium text-ink-soft">{label}</label>}
 
-      {description && <p className="text-sm text-ink-soft">{description}</p>}
+      {description && <p className="text-sm text-steel-grey">{description}</p>}
 
       <div className="relative">
-        {/* Trigger Button.
-            aria-haspopup="menu" matches the actual popup semantics: options
-            commit on click (not select-then-activate), which is a menu
-            pattern, not listbox. aria-controls wires the trigger to the
-            popup id so screen readers know they're linked. */}
         <button
           ref={buttonRef}
           type="button"
@@ -83,14 +73,20 @@ export function Dropdown({
           aria-expanded={isOpen}
           aria-controls={isOpen ? menuId : undefined}
           aria-label={label}
-          className="w-full flex items-center justify-between border border-black bg-white px-4 py-3 font-mono text-sm transition-all duration-150 ease-out shadow-sw-sm hover:shadow-none hover:translate-y-[2px] hover:translate-x-[2px] disabled:opacity-50 disabled:cursor-not-allowed rounded-none"
+          className={cn(
+            'flex w-full cursor-pointer items-center justify-between rounded-lg border border-border bg-white px-4 py-2.5 text-sm text-ink',
+            'shadow-sw-xs transition-[border-color,box-shadow] duration-150 ease-out motion-reduce:transition-none',
+            'hover:border-slate-300',
+            isOpen && 'border-primary ring-4 ring-primary/10',
+            'disabled:opacity-50 disabled:cursor-not-allowed'
+          )}
         >
-          <div className="flex-1 text-left min-w-0">
+          <div className="flex-1 min-w-0 text-left">
             {selectedOption ? (
               <div>
-                <div className="font-bold text-black truncate">{selectedOption.label}</div>
+                <div className="truncate font-medium text-ink">{selectedOption.label}</div>
                 {selectedOption.description && (
-                  <div className="text-xs text-steel-grey mt-1 font-normal truncate">
+                  <div className="mt-0.5 truncate text-xs font-normal text-steel-grey">
                     {selectedOption.description}
                   </div>
                 )}
@@ -100,52 +96,42 @@ export function Dropdown({
             )}
           </div>
           <ChevronDown
-            className={`w-4 h-4 transition-transform duration-200 ml-2 shrink-0 ${
-              isOpen ? 'rotate-180' : ''
-            }`}
+            className={cn(
+              'ml-2 h-4 w-4 shrink-0 text-steel-grey transition-transform duration-150 motion-reduce:transition-none',
+              isOpen && 'rotate-180'
+            )}
           />
         </button>
 
-        {/* Dropdown Menu. Uses menuitemradio (not plain menuitem) because
-            this is a single-value selector, not a command menu — options
-            express a mutually-exclusive selection. aria-checked on the
-            selected item lets screen readers announce which option is
-            currently active. A full listbox pattern would also be valid
-            but needs arrow-key navigation + aria-activedescendant, which
-            is tracked as a follow-up. */}
         {isOpen && (
           <div
             id={menuId}
             role="menu"
             aria-label={label}
-            className="absolute top-full left-0 right-0 mt-1 z-50 border border-black bg-white shadow-sw-default rounded-none"
+            className="absolute left-0 right-0 top-full z-50 mt-1.5 max-h-64 overflow-y-auto rounded-xl border border-border bg-white p-1.5 shadow-sw-lg motion-safe:animate-in motion-safe:fade-in-0 motion-safe:slide-in-from-top-1 motion-safe:duration-150"
           >
-            <div className="max-h-64 overflow-y-auto">
-              {options.map((option, index) => (
-                <React.Fragment key={option.id}>
-                  <button
-                    role="menuitemradio"
-                    aria-checked={option.id === value}
-                    onClick={() => handleSelect(option.id)}
-                    className={`w-full px-4 py-3 text-left font-mono transition-colors duration-150 border border-black ${
-                      option.id === value
-                        ? 'bg-green-700 text-white'
-                        : 'bg-white text-black hover:bg-paper-tint'
-                    } ${index > 0 ? '-mt-[1px]' : ''} active:bg-paper-tint`}
-                  >
-                    <div className="flex items-start justify-between gap-2">
-                      <div className="flex-1">
-                        <div className="font-bold text-sm">{option.label}</div>
-                        {option.description && (
-                          <div className="text-xs mt-1 opacity-80">{option.description}</div>
-                        )}
-                      </div>
-                      {option.id === value && <div className="text-lg font-bold mt-0.5">✓</div>}
-                    </div>
-                  </button>
-                </React.Fragment>
-              ))}
-            </div>
+            {options.map((option) => (
+              <button
+                key={option.id}
+                role="menuitemradio"
+                aria-checked={option.id === value}
+                onClick={() => handleSelect(option.id)}
+                className={cn(
+                  'flex w-full items-start justify-between gap-2 rounded-lg px-3 py-2.5 text-left transition-colors duration-100 motion-reduce:transition-none',
+                  option.id === value ? 'bg-accent text-accent-foreground' : 'hover:bg-paper-tint'
+                )}
+              >
+                <div className="min-w-0 flex-1">
+                  <div className="text-sm font-medium text-ink">{option.label}</div>
+                  {option.description && (
+                    <div className="mt-0.5 text-xs text-steel-grey">{option.description}</div>
+                  )}
+                </div>
+                {option.id === value && (
+                  <Check className="mt-0.5 h-4 w-4 shrink-0 text-primary" aria-hidden="true" />
+                )}
+              </button>
+            ))}
           </div>
         )}
       </div>

@@ -13,7 +13,8 @@ import { OutreachPreview } from './outreach-preview';
 import { GeneratePrompt } from './generate-prompt';
 import { InterviewPrepView } from './interview-prep-view';
 import { Button } from '@/components/ui/button';
-import { RetroTabs } from '@/components/ui/retro-tabs';
+import { Tabs } from '@/components/ui/tabs';
+import { Badge } from '@/components/ui/badge';
 import { ConfirmDialog, type ConfirmDialogProps } from '@/components/ui/confirm-dialog';
 import {
   Download,
@@ -709,35 +710,30 @@ const ResumeBuilderContent = () => {
   };
 
   return (
-    <div className="h-full w-full bg-background flex justify-center items-center p-4 md:p-8">
+    <div className="h-full w-full bg-background flex justify-center items-center p-3 md:p-6">
       {/* Main Container */}
-      <div className="w-full h-full max-w-[90%] md:max-w-[95%] xl:max-w-[1800px] border border-black bg-background shadow-sw-lg flex flex-col">
+      <div className="w-full h-full max-w-[95%] xl:max-w-[1800px] rounded-2xl border border-border bg-white shadow-sw-lg flex flex-col overflow-hidden">
         {/* Header Section */}
-        <div className="border-b border-black p-6 md:p-8 bg-background no-print">
+        <div className="border-b border-border p-6 md:p-8 bg-white no-print">
           {/* Top Row: Back button and Actions */}
           <div className="flex flex-col md:flex-row justify-between items-start md:items-center mb-6">
             <div>
-              <Button
-                variant="link"
-                onClick={() => router.push('/dashboard')}
-                className="mb-2 -ml-1"
-              >
+              <Button variant="link" onClick={() => router.push('/dashboard')} className="mb-2">
                 <ArrowLeft className="w-4 h-4" />
                 {t('nav.backToDashboard')}
               </Button>
-              <h1 className="font-serif text-3xl md:text-5xl text-black tracking-tight leading-[0.95] uppercase">
+              <h1 className="text-2xl md:text-3xl font-bold tracking-tight text-ink">
                 {t('nav.builder')}
               </h1>
-              <div className="mt-3 flex items-center gap-3">
-                <p className="text-sm font-mono text-blue-700 uppercase tracking-wide font-bold">
-                  {'// '}
+              <div className="mt-2 flex items-center gap-3">
+                <p className="text-sm text-steel-grey">
                   {resumeId ? t('builder.editMode') : t('builder.createAndPreview')}
                 </p>
                 {hasUnsavedChanges && (
-                  <span className="flex items-center gap-1 text-xs font-mono text-amber-600 bg-amber-50 px-2 py-1 border border-amber-200">
+                  <Badge variant="warning">
                     <AlertTriangle className="w-3 h-3" />
                     {t('builder.unsavedDraft')}
-                  </span>
+                  </Badge>
                 )}
               </div>
             </div>
@@ -861,13 +857,12 @@ const ResumeBuilderContent = () => {
         </div>
 
         {/* Content Grid */}
-        <div className="grid grid-cols-1 lg:grid-cols-2 bg-black gap-[1px] flex-1 min-h-0">
+        <div className="grid grid-cols-1 lg:grid-cols-2 lg:divide-x lg:divide-border flex-1 min-h-0">
           {/* Left Panel: Editor */}
-          <div className="bg-background p-6 md:p-8 overflow-y-auto no-print">
+          <div className="bg-white p-6 md:p-8 overflow-y-auto no-print">
             <div className="max-w-3xl mx-auto space-y-6">
-              <div className="flex items-center gap-2 border-b-2 border-black pb-2">
-                <div className="w-3 h-3 bg-blue-700"></div>
-                <h2 className="font-mono text-lg font-bold uppercase tracking-wider">
+              <div className="border-b border-border pb-3">
+                <h2 className="text-sm font-semibold text-ink-soft">
                   {activeTab === 'resume' && t('builder.leftPanel.editorPanel')}
                   {activeTab === 'cover-letter' && t('builder.leftPanel.coverLetterEditor')}
                   {activeTab === 'outreach' && t('builder.leftPanel.outreachEditor')}
@@ -937,8 +932,8 @@ const ResumeBuilderContent = () => {
               {/* JD Match Info Panel */}
               {activeTab === 'jd-match' && (
                 <div className="space-y-4">
-                  <div className="border-2 border-black bg-white p-4">
-                    <h3 className="font-mono text-sm font-bold uppercase mb-2">
+                  <div className="rounded-xl border border-border bg-paper-tint/40 p-4">
+                    <h3 className="text-sm font-semibold text-ink mb-1.5">
                       {t('builder.jdMatch.aboutTitle')}
                     </h3>
                     <p className="text-sm text-ink-soft leading-relaxed">
@@ -946,8 +941,8 @@ const ResumeBuilderContent = () => {
                     </p>
                   </div>
 
-                  <div className="border-2 border-black bg-background p-4">
-                    <h3 className="font-mono text-sm font-bold uppercase mb-2">
+                  <div className="rounded-xl border border-border bg-paper-tint/40 p-4">
+                    <h3 className="text-sm font-semibold text-ink mb-1.5">
                       {t('builder.jdMatch.highlightedKeywordsTitle')}
                     </h3>
                     <p className="text-sm text-ink-soft leading-relaxed">
@@ -960,7 +955,7 @@ const ResumeBuilderContent = () => {
                         return (
                           <>
                             {parts[0]}
-                            <mark className="bg-yellow-200 px-1">
+                            <mark className="rounded bg-yellow-200 px-1">
                               {t('builder.jdMatch.highlightColor')}
                             </mark>
                             {parts.slice(1).join('__COLOR__')}
@@ -970,8 +965,8 @@ const ResumeBuilderContent = () => {
                     </p>
                   </div>
 
-                  <div className="border-2 border-black bg-white p-4">
-                    <h3 className="font-mono text-sm font-bold uppercase mb-2">
+                  <div className="rounded-xl border border-border bg-paper-tint/40 p-4">
+                    <h3 className="text-sm font-semibold text-ink mb-1.5">
                       {t('builder.jdMatch.tipsTitle')}
                     </h3>
                     <ul className="text-sm text-ink-soft space-y-1 list-disc list-inside">
@@ -986,10 +981,10 @@ const ResumeBuilderContent = () => {
           </div>
 
           {/* Right Panel: Preview with Tabs */}
-          <div className="bg-secondary overflow-hidden flex flex-col no-print">
+          <div className="bg-paper-tint/40 overflow-hidden flex flex-col no-print">
             {/* Tabs Header */}
-            <div className="px-6 pt-3 shrink-0 bg-secondary">
-              <RetroTabs
+            <div className="px-6 pt-3 shrink-0 bg-paper-tint/40">
+              <Tabs
                 tabs={[
                   { id: 'resume', label: t('builder.previewTabs.resume') },
                   {
@@ -1084,31 +1079,29 @@ const ResumeBuilderContent = () => {
         </div>
 
         {/* Footer */}
-        <div className="p-4 bg-background flex justify-between items-center font-mono text-xs text-blue-700 border-t border-black no-print">
-          <span className="uppercase font-bold flex items-center gap-2">
+        <div className="p-4 bg-paper-tint/40 flex justify-between items-center text-xs text-steel-grey border-t border-border no-print">
+          <span className="font-medium flex items-center gap-2">
             <Image
               src="/logo.svg"
               alt="Resume Matcher"
-              width={20}
-              height={20}
-              className="w-5 h-5"
+              width={18}
+              height={18}
+              className="w-[18px] h-[18px]"
             />
             {t('builder.footer.moduleLabel')}
           </span>
-          <div className="flex items-center gap-4">
-            <div className="flex items-center gap-2">
-              <div className="w-2 h-2 bg-green-700"></div>
-              <span className="uppercase">
-                {templateSettings.template === 'swiss-single' ||
-                templateSettings.template === 'modern' ||
-                templateSettings.template === 'latex' ||
-                templateSettings.template === 'clean'
-                  ? t('builder.footer.singleColumn')
-                  : t('builder.footer.twoColumn')}
-              </span>
-            </div>
-            <span className="text-steel-grey">|</span>
-            <span className="uppercase">
+          <div className="flex items-center gap-3">
+            <span className="flex items-center gap-1.5">
+              <span className="h-1.5 w-1.5 rounded-full bg-emerald-500" />
+              {templateSettings.template === 'swiss-single' ||
+              templateSettings.template === 'modern' ||
+              templateSettings.template === 'latex' ||
+              templateSettings.template === 'clean'
+                ? t('builder.footer.singleColumn')
+                : t('builder.footer.twoColumn')}
+            </span>
+            <span className="text-slate-300">·</span>
+            <span>
               {templateSettings.pageSize === 'A4' ? 'A4' : t('builder.pageSize.usLetter')}
             </span>
           </div>
