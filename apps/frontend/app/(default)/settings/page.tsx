@@ -40,6 +40,8 @@ import { Input } from '@/components/ui/input';
 import { Label } from '@/components/ui/label';
 import { ConfirmDialog } from '@/components/ui/confirm-dialog';
 import { Dropdown } from '@/components/ui/dropdown';
+import { Alert } from '@/components/ui/alert';
+import { Disclosure } from '@/components/ui/disclosure';
 import {
   Save,
   Key,
@@ -58,7 +60,6 @@ import {
   Settings2,
   Globe,
   Trash2,
-  AlertTriangle,
 } from 'lucide-react';
 import { useLanguage } from '@/lib/context/language-context';
 import { useTranslations } from '@/lib/i18n';
@@ -656,19 +657,13 @@ export default function SettingsPage() {
         <div className="p-8 space-y-10">
           {/* API Key Not Configured Warning */}
           {!statusLoading && systemStatus && !systemStatus.llm_configured && (
-            <div className="border-2 border-amber-500 bg-amber-50 p-4 shadow-sw-default">
-              <div className="flex items-start gap-3">
-                <div className="w-3 h-3 bg-amber-500 mt-1 shrink-0"></div>
-                <div className="flex-1">
-                  <p className="font-mono text-sm font-bold uppercase tracking-wider text-amber-800">
-                    {t('settings.setupRequired.title')}
-                  </p>
-                  <p className="font-mono text-xs text-amber-700 mt-1">
-                    {t('settings.setupRequired.description')}
-                  </p>
-                </div>
-              </div>
-            </div>
+            <Alert
+              variant="warning"
+              area={t('settings.title')}
+              title={t('settings.setupRequired.title')}
+            >
+              {t('settings.setupRequired.description')}
+            </Alert>
           )}
 
           {/* System Status Panel */}
@@ -962,43 +957,58 @@ export default function SettingsPage() {
                 </div>
               )}
 
-              {/* API Base URL (optional, for proxies/aggregators/custom endpoints) */}
-              <div className="space-y-2">
-                <Label htmlFor="apiBase">{t('settings.llmConfiguration.baseUrlLabel')}</Label>
-                <Input
-                  id="apiBase"
-                  value={apiBase}
-                  onChange={(e) => setApiBase(e.target.value)}
-                  placeholder={t('settings.llmConfiguration.baseUrlPlaceholder')}
-                  className="font-mono"
-                />
-                <p className="text-xs text-steel-grey font-mono">
-                  {t('settings.llmConfiguration.baseUrlDescription')}
-                </p>
-              </div>
+              {/* Advanced LLM settings — base URL + reasoning effort are rarely
+                  touched, so they're tucked behind a disclosure. Defaults open
+                  when either already has a non-default value set, so existing
+                  configuration stays visible instead of hiding silently. */}
+              <Disclosure
+                label={t('settings.llmConfiguration.advancedSettingsLabel')}
+                defaultOpen={Boolean(apiBase.trim()) || reasoningEffort !== 'auto'}
+              >
+                {/* API Base URL (optional, for proxies/aggregators/custom endpoints) */}
+                <div className="space-y-2">
+                  <Label htmlFor="apiBase">{t('settings.llmConfiguration.baseUrlLabel')}</Label>
+                  <Input
+                    id="apiBase"
+                    value={apiBase}
+                    onChange={(e) => setApiBase(e.target.value)}
+                    placeholder={t('settings.llmConfiguration.baseUrlPlaceholder')}
+                    className="font-mono"
+                  />
+                  <p className="text-xs text-steel-grey font-mono">
+                    {t('settings.llmConfiguration.baseUrlDescription')}
+                  </p>
+                </div>
 
-              {/* Reasoning Effort (optional, only applies to reasoning-capable models) */}
-              <div className="space-y-2">
-                <Dropdown
-                  label={t('settings.llmConfiguration.reasoningEffortLabel')}
-                  value={reasoningEffort}
-                  onChange={(value) => setReasoningEffort(value as ReasoningEffort | 'auto')}
-                  options={[
-                    {
-                      id: 'auto',
-                      label: t('settings.llmConfiguration.reasoningEffortAuto'),
-                      description: t('settings.llmConfiguration.reasoningEffortAutoDesc'),
-                    },
-                    { id: 'minimal', label: t('settings.llmConfiguration.reasoningEffortMinimal') },
-                    { id: 'low', label: t('settings.llmConfiguration.reasoningEffortLow') },
-                    { id: 'medium', label: t('settings.llmConfiguration.reasoningEffortMedium') },
-                    { id: 'high', label: t('settings.llmConfiguration.reasoningEffortHigh') },
-                  ]}
-                />
-                <p className="text-xs text-steel-grey font-mono">
-                  {t('settings.llmConfiguration.reasoningEffortDescription')}
-                </p>
-              </div>
+                {/* Reasoning Effort (optional, only applies to reasoning-capable models) */}
+                <div className="space-y-2">
+                  <Dropdown
+                    label={t('settings.llmConfiguration.reasoningEffortLabel')}
+                    value={reasoningEffort}
+                    onChange={(value) => setReasoningEffort(value as ReasoningEffort | 'auto')}
+                    options={[
+                      {
+                        id: 'auto',
+                        label: t('settings.llmConfiguration.reasoningEffortAuto'),
+                        description: t('settings.llmConfiguration.reasoningEffortAutoDesc'),
+                      },
+                      {
+                        id: 'minimal',
+                        label: t('settings.llmConfiguration.reasoningEffortMinimal'),
+                      },
+                      { id: 'low', label: t('settings.llmConfiguration.reasoningEffortLow') },
+                      {
+                        id: 'medium',
+                        label: t('settings.llmConfiguration.reasoningEffortMedium'),
+                      },
+                      { id: 'high', label: t('settings.llmConfiguration.reasoningEffortHigh') },
+                    ]}
+                  />
+                  <p className="text-xs text-steel-grey font-mono">
+                    {t('settings.llmConfiguration.reasoningEffortDescription')}
+                  </p>
+                </div>
+              </Disclosure>
 
               {/* Action Buttons */}
               <div className="flex gap-4">
@@ -1039,11 +1049,9 @@ export default function SettingsPage() {
 
               {/* Error Message */}
               {error && (
-                <div className="border border-red-300 bg-red-50 p-3">
-                  <p className="text-xs text-red-600 font-mono break-words">
-                    {t('settings.llmConfiguration.errorPrefix', { error })}
-                  </p>
-                </div>
+                <Alert variant="error" area={t('settings.llmConfigurationTitle')}>
+                  {t('settings.llmConfiguration.errorPrefix', { error })}
+                </Alert>
               )}
 
               {/* Health Check Result */}
@@ -1329,54 +1337,51 @@ export default function SettingsPage() {
             </div>
           </section>
 
-          {/* Danger Zone */}
-          <section className="space-y-6">
-            <div className="flex items-center gap-2 border-b border-red-200 pb-2">
-              <AlertTriangle className="w-4 h-4 text-red-600" />
-              <h2 className="font-mono text-sm font-bold uppercase tracking-wider text-red-600">
-                {t('settings.dangerZone')}
-              </h2>
-            </div>
-
-            <div className="grid md:grid-cols-2 gap-6">
-              {/* Clear API Keys */}
-              <div className="border border-red-200 bg-red-50/50 p-6 space-y-4">
-                <div>
-                  <h3 className="font-bold text-sm text-red-900 mb-1">
+          {/* Danger Zone — collapsed by default so destructive actions aren't
+              the first thing visible on the page; the label itself still
+              reads as a warning via the disclosure's danger tone. */}
+          <section>
+            <Disclosure label={t('settings.dangerZone')} tone="danger">
+              <div className="grid md:grid-cols-2 gap-6">
+                {/* Clear API Keys */}
+                <div className="border border-red-200 bg-red-50/50 p-6 space-y-4">
+                  <div>
+                    <h3 className="font-bold text-sm text-red-900 mb-1">
+                      {t('settings.clearApiKeys')}
+                    </h3>
+                    <p className="text-xs text-red-700">{t('settings.clearApiKeysDescription')}</p>
+                  </div>
+                  <Button
+                    variant="outline"
+                    className="w-full border-red-200 text-red-700 hover:bg-red-50 hover:text-red-800 hover:border-red-300"
+                    onClick={() => setShowClearApiKeysDialog(true)}
+                    disabled={isResetting}
+                  >
+                    <Key className="w-4 h-4 mr-2" />
                     {t('settings.clearApiKeys')}
-                  </h3>
-                  <p className="text-xs text-red-700">{t('settings.clearApiKeysDescription')}</p>
+                  </Button>
                 </div>
-                <Button
-                  variant="outline"
-                  className="w-full border-red-200 text-red-700 hover:bg-red-50 hover:text-red-800 hover:border-red-300"
-                  onClick={() => setShowClearApiKeysDialog(true)}
-                  disabled={isResetting}
-                >
-                  <Key className="w-4 h-4 mr-2" />
-                  {t('settings.clearApiKeys')}
-                </Button>
-              </div>
 
-              {/* Reset Database */}
-              <div className="border border-red-200 bg-red-50/50 p-6 space-y-4">
-                <div>
-                  <h3 className="font-bold text-sm text-red-900 mb-1">
+                {/* Reset Database */}
+                <div className="border border-red-200 bg-red-50/50 p-6 space-y-4">
+                  <div>
+                    <h3 className="font-bold text-sm text-red-900 mb-1">
+                      {t('settings.resetDatabase')}
+                    </h3>
+                    <p className="text-xs text-red-700">{t('settings.resetDatabaseDescription')}</p>
+                  </div>
+                  <Button
+                    variant="destructive"
+                    className="w-full"
+                    onClick={() => setShowResetDatabaseDialog(true)}
+                    disabled={isResetting}
+                  >
+                    <Trash2 className="w-4 h-4 mr-2" />
                     {t('settings.resetDatabase')}
-                  </h3>
-                  <p className="text-xs text-red-700">{t('settings.resetDatabaseDescription')}</p>
+                  </Button>
                 </div>
-                <Button
-                  variant="destructive"
-                  className="w-full"
-                  onClick={() => setShowResetDatabaseDialog(true)}
-                  disabled={isResetting}
-                >
-                  <Trash2 className="w-4 h-4 mr-2" />
-                  {t('settings.resetDatabase')}
-                </Button>
               </div>
-            </div>
+            </Disclosure>
           </section>
         </div>
 

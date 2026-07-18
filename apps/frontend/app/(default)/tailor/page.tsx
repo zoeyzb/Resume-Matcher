@@ -16,11 +16,12 @@ import {
 import { fetchPromptConfig, type PromptOption } from '@/lib/api/config';
 import { Dropdown } from '@/components/ui/dropdown';
 import { useStatusCache } from '@/lib/context/status-cache';
-import { Loader2, ArrowLeft, AlertTriangle, Settings } from 'lucide-react';
+import { Loader2, ArrowLeft, Settings } from 'lucide-react';
 import { useTranslations } from '@/lib/i18n';
 import { DiffPreviewModal } from '@/components/tailor/diff-preview-modal';
 import { ATSScoreCard } from '@/components/tailor/ats-score-card';
 import { ConfirmDialog } from '@/components/ui/confirm-dialog';
+import { Alert } from '@/components/ui/alert';
 
 export default function TailorPage() {
   const { t } = useTranslations();
@@ -348,28 +349,25 @@ export default function TailorPage() {
 
         {/* LLM Not Configured Warning */}
         {!statusLoading && !isLlmConfigured && (
-          <div className="mb-6 border-2 border-amber-500 bg-amber-50 p-4 shadow-sw-default">
-            <div className="flex items-start gap-3">
-              <AlertTriangle className="w-5 h-5 text-amber-600 shrink-0 mt-0.5" />
-              <div className="flex-1">
-                <p className="font-mono text-sm font-bold uppercase tracking-wider text-amber-800">
-                  {t('tailor.setupRequiredTitle')}
-                </p>
-                <p className="font-mono text-xs text-amber-700 mt-1">
-                  {t('tailor.noApiKeyMessage')}
-                </p>
-                <Link
-                  href="/settings"
-                  className="inline-flex items-center gap-2 mt-3 text-amber-700 hover:text-amber-900 transition-colors"
-                >
-                  <Settings className="w-4 h-4" />
-                  <span className="font-mono text-xs font-bold uppercase underline">
-                    {t('tailor.configureApiKey')}
-                  </span>
-                </Link>
-              </div>
-            </div>
-          </div>
+          <Alert
+            variant="warning"
+            area={t('tailor.heroTitle')}
+            title={t('tailor.setupRequiredTitle')}
+            className="mb-6"
+            action={
+              <Link
+                href="/settings"
+                className="inline-flex items-center gap-2 text-amber-800 hover:text-amber-900 transition-colors motion-reduce:transition-none"
+              >
+                <Settings className="w-4 h-4" />
+                <span className="font-mono text-xs font-bold uppercase underline">
+                  {t('tailor.configureApiKey')}
+                </span>
+              </Link>
+            }
+          >
+            {t('tailor.noApiKeyMessage')}
+          </Alert>
         )}
 
         <div className="space-y-6">
@@ -424,9 +422,9 @@ export default function TailorPage() {
           </div>
 
           {error && (
-            <div className="p-4 bg-red-50 border border-red-200 text-red-700 text-sm font-mono flex items-center gap-2">
-              <span>!</span> {error}
-            </div>
+            <Alert variant="error" area={t('tailor.heroTitle')}>
+              {error}
+            </Alert>
           )}
 
           <Button

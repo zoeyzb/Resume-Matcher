@@ -141,6 +141,22 @@
      global rule was leaking into nested text inside <button> elements. */
 }
 
+/* Respect the OS-level "reduce motion" preference. Decorative
+   hover/enter/collapse transitions are neutralized; functional loading
+   spinners (Loader2 animate-spin) are intentionally left alone since they
+   communicate required state, not decoration. Tailwind's `motion-reduce:`
+   variant handles most new component code directly — this is the blanket
+   fallback for existing `transition-*`/`animate-in`/`animate-out` usage
+   that predates that convention. */
+@media (prefers-reduced-motion: reduce) {
+  *:not(.animate-spin, .animate-spin *) {
+    animation-duration: 0.001ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.001ms !important;
+    scroll-behavior: auto !important;
+  }
+}
+
 @media print {
   html,
   body {

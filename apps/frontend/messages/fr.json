@@ -45,7 +45,10 @@
     "settings": "Paramètres",
     "backToDashboard": "Retour au tableau de bord",
     "goToSettings": "Accéder aux paramètres",
-    "applicationTracker": "Suivi des candidatures"
+    "applicationTracker": "Suivi des candidatures",
+    "tracker": "Suivi",
+    "openMenu": "Ouvrir le menu",
+    "closeMenu": "Fermer le menu"
   },
   "dashboard": {
     "title": "Tableau de bord",
@@ -663,6 +666,7 @@
       "apiKeyNotRequiredPlaceholder": "Non requise pour les modèles locaux",
       "apiKeyOptionalPlaceholder": "Laissez vide si votre serveur n'a pas d'authentification",
       "leaveBlankToKeepExistingKey": "LAISSER VIDE POUR CONSERVER LA CLÉ EXISTANTE",
+      "advancedSettingsLabel": "Paramètres avancés",
       "baseUrlLabel": "URL de base (optionnelle)",
       "baseUrlPlaceholder": "ex. https://api.openai.com/v1",
       "baseUrlDescription": "Remplacez l'URL de base de l'API pour utiliser un proxy/agrégateur. Laissez vide pour utiliser la valeur par défaut du fournisseur.",

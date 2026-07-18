@@ -709,7 +709,7 @@ const ResumeBuilderContent = () => {
   };
 
   return (
-    <div className="h-screen w-full bg-background flex justify-center items-center p-4 md:p-8">
+    <div className="h-full w-full bg-background flex justify-center items-center p-4 md:p-8">
       {/* Main Container */}
       <div className="w-full h-full max-w-[90%] md:max-w-[95%] xl:max-w-[1800px] border border-black bg-background shadow-sw-lg flex flex-col">
         {/* Header Section */}

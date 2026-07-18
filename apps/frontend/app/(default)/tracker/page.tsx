@@ -9,10 +9,11 @@ import { useTranslations } from '@/lib/i18n';
 export default function TrackerPage() {
   const { t } = useTranslations();
   return (
-    // Fill the viewport so the Swiss canvas grows with the window; the board
-    // area flexes to the available height and the columns scroll internally.
-    <main
-      className="flex h-[100dvh] w-full flex-col overflow-hidden bg-background px-4 py-6 md:px-8"
+    // Fill the space handed down by the app shell's <main> (viewport minus
+    // the top nav) so the board area flexes to the available height and the
+    // columns scroll internally.
+    <div
+      className="flex h-full w-full flex-col overflow-hidden bg-background px-4 py-6 md:px-8"
       style={{
         backgroundImage:
           'linear-gradient(rgba(29, 78, 216, 0.1) 1px, transparent 1px), linear-gradient(90deg, rgba(29, 78, 216, 0.1) 1px, transparent 1px)',
@@ -31,6 +32,6 @@ export default function TrackerPage() {
           <KanbanBoard />
         </div>
       </div>
-    </main>
+    </div>
   );
 }
