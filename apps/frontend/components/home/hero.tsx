@@ -2,7 +2,6 @@
 
 import React from 'react';
 import Link from 'next/link';
-import Image from 'next/image';
 import ArrowRight from 'lucide-react/dist/esm/icons/arrow-right';
 import Wand2 from 'lucide-react/dist/esm/icons/wand-2';
 import Target from 'lucide-react/dist/esm/icons/target';
@@ -33,18 +32,7 @@ export default function Hero() {
       />
 
       <div className="flex flex-col items-center">
-        <div className="flex items-center gap-2.5">
-          <Image
-            src="/logo.svg"
-            alt=""
-            width={36}
-            height={36}
-            className="h-9 w-9"
-            aria-hidden="true"
-          />
-        </div>
-
-        <span className="mt-5 inline-flex items-center gap-1.5 rounded-full bg-gold-tint px-3 py-1 text-xs font-semibold text-gold">
+        <span className="inline-flex items-center gap-1.5 rounded-full bg-gold-tint px-3 py-1 text-xs font-semibold text-gold">
           <Wand2 className="h-3 w-3" aria-hidden="true" />
           {t('home.eyebrow')}
         </span>

@@ -1,7 +1,6 @@
 'use client';
 
 import React, { useEffect, useMemo, useState } from 'react';
-import Image from 'next/image';
 import {
   fetchLlmConfig,
   updateLlmConfig,
@@ -1172,13 +1171,6 @@ export default function SettingsPage() {
         {/* Footer */}
         <div className="flex items-center justify-between rounded-xl bg-paper-tint/60 px-4 py-3">
           <div className="flex items-center gap-2">
-            <Image
-              src="/logo.svg"
-              alt="NextRole"
-              width={18}
-              height={18}
-              className="h-[18px] w-[18px]"
-            />
             <span className="text-xs text-steel-grey">{getVersionString()}</span>
           </div>
           <div className="flex items-center gap-2">

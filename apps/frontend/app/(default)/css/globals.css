@@ -48,11 +48,11 @@
      additional semantics referenced directly by components (bg-canvas,
      text-ink-soft, etc). Kept under their original names so every existing
      call site re-themes automatically. */
-  --color-canvas: #f8fafc; /* slate-50 page background */
+  --color-canvas: #f6f4ee; /* warm stone-50 page background — not stark white */
   --color-ink: #0f172a; /* slate-900 primary text/headings */
   --color-ink-soft: #334155; /* slate-700 secondary body text */
   --color-steel-grey: #64748b; /* slate-500 tertiary/caption text */
-  --color-paper-tint: #f1f5f9; /* slate-100 subtle fills */
+  --color-paper-tint: #efece3; /* warm stone-100 subtle fills */
 
   --color-success: #059669; /* emerald-600 */
   --color-success-tint: #ecfdf5;
@@ -101,8 +101,9 @@
   --font-mono: ui-monospace, 'SF Mono', 'Cascadia Code', Consolas, monospace;
   --font-sans: 'Plus Jakarta Sans', sans-serif;
 
-  /* Premium neutral palette */
-  --background: #f8fafc; /* slate-50 */
+  /* Premium neutral palette — a warm stone canvas (not stark white) with
+     white cards for contrast/elevation. */
+  --background: #f6f4ee; /* warm stone-50 */
   --foreground: #0f172a; /* slate-900 */
 
   --card: #ffffff;
@@ -114,10 +115,10 @@
   --primary: #047857; /* emerald-700 */
   --primary-foreground: #ffffff;
 
-  --secondary: #f1f5f9; /* slate-100 */
+  --secondary: #efece3; /* warm stone-100 */
   --secondary-foreground: #0f172a;
 
-  --muted: #f1f5f9;
+  --muted: #efece3;
   --muted-foreground: #64748b;
 
   --accent: #ecfdf5; /* emerald-50 */
@@ -126,7 +127,7 @@
   --destructive: #dc2626;
   --destructive-foreground: #ffffff;
 
-  --border: #e2e8f0; /* slate-200 */
+  --border: #e5e1d6; /* warm stone-200 */
   --input: #ffffff;
   --ring: #047857;
 
@@ -140,9 +141,9 @@
   --sidebar-foreground: #0f172a;
   --sidebar-primary: #047857;
   --sidebar-primary-foreground: #ffffff;
-  --sidebar-accent: #f1f5f9;
+  --sidebar-accent: #efece3;
   --sidebar-accent-foreground: #0f172a;
-  --sidebar-border: #e2e8f0;
+  --sidebar-border: #e5e1d6;
   --sidebar-ring: #047857;
 }
 

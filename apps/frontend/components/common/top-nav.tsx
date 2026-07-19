@@ -2,7 +2,6 @@
 
 import React, { useEffect, useState } from 'react';
 import Link from 'next/link';
-import Image from 'next/image';
 import { usePathname } from 'next/navigation';
 import Menu from 'lucide-react/dist/esm/icons/menu';
 import X from 'lucide-react/dist/esm/icons/x';
@@ -58,17 +57,7 @@ export function TopNav() {
           href="/dashboard"
           className="flex items-center gap-2 rounded-lg focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary focus-visible:ring-offset-2"
         >
-          <Image
-            src="/logo.svg"
-            alt=""
-            width={22}
-            height={22}
-            className="h-[22px] w-[22px] shrink-0"
-            aria-hidden="true"
-          />
-          <span className="sr-only sm:not-sr-only text-[15px] font-bold tracking-tight text-ink">
-            NextRole
-          </span>
+          <span className="text-[15px] font-bold tracking-tight text-ink">NextRole</span>
         </Link>
 
         {/* Desktop nav */}
