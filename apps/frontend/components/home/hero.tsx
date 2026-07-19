@@ -35,15 +35,7 @@ export default function Hero() {
           <ArrowRight className="h-4 w-4" />
         </Link>
         <a
-          href="https://resumematcher.fyi"
-          target="_blank"
-          rel="noopener noreferrer"
-          className="inline-flex h-12 items-center justify-center rounded-lg border border-border bg-white px-6 text-sm font-semibold text-ink transition-colors duration-150 hover:bg-paper-tint motion-reduce:transition-none focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary focus-visible:ring-offset-2"
-        >
-          {t('home.docs')}
-        </a>
-        <a
-          href="https://github.com/srbhr/Resume-Matcher"
+          href="https://github.com/zoeyzb/Resume-Matcher"
           target="_blank"
           rel="noopener noreferrer"
           className="inline-flex h-12 items-center justify-center rounded-lg px-6 text-sm font-medium text-steel-grey transition-colors duration-150 hover:text-ink motion-reduce:transition-none focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary focus-visible:ring-offset-2"

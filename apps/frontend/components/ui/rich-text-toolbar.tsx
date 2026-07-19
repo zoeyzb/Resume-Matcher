@@ -14,8 +14,8 @@ interface RichTextToolbarProps {
 /**
  * Rich Text Toolbar Component
  *
- * Swiss International Style formatting toolbar with B/I/U/Link buttons.
- * Active states shown with Hyper Blue background.
+ * Formatting toolbar with B/I/U/Link buttons.
+ * Active states shown with the emerald brand accent.
  */
 export const RichTextToolbar: React.FC<RichTextToolbarProps> = ({ editor, onLinkClick }) => {
   const tools = [

@@ -53,10 +53,10 @@ const VARIANT_STYLES: Record<
     Icon: CheckCircle2,
   },
   info: {
-    border: 'border-l-indigo-500',
-    bg: 'bg-indigo-50/60',
-    iconWrap: 'bg-indigo-100 text-primary',
-    text: 'text-indigo-800',
+    border: 'border-l-violet-500',
+    bg: 'bg-violet-50/60',
+    iconWrap: 'bg-violet-100 text-violet-600',
+    text: 'text-violet-800',
     Icon: Info,
   },
 };

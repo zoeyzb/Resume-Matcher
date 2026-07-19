@@ -115,7 +115,7 @@ export const AddSectionDialog: React.FC<AddSectionDialogProps> = ({
                   className={cn(
                     'flex w-full cursor-pointer items-start gap-3 rounded-xl border p-4 text-left transition-colors duration-150 motion-reduce:transition-none',
                     sectionType === item.type
-                      ? 'border-primary bg-indigo-50/50 ring-2 ring-primary/20'
+                      ? 'border-primary bg-emerald-50/50 ring-2 ring-primary/20'
                       : 'border-border hover:bg-paper-tint'
                   )}
                 >

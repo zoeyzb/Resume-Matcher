@@ -56,7 +56,7 @@ export const TemplateSelector: React.FC<TemplateSelectorProps> = ({ value, onCha
           onClick={() => onChange(template.id)}
           className={`group flex cursor-pointer flex-col items-center rounded-xl border p-3 transition-colors duration-150 motion-reduce:transition-none ${
             value === template.id
-              ? 'border-primary bg-indigo-50/50 ring-2 ring-primary/20'
+              ? 'border-primary bg-emerald-50/50 ring-2 ring-primary/20'
               : 'border-border bg-white hover:bg-paper-tint/60'
           }`}
           title={templateLabels[template.id].description}
@@ -90,9 +90,9 @@ interface TemplateThumbnailProps {
 }
 
 export const TemplateThumbnail: React.FC<TemplateThumbnailProps> = ({ type, isActive }) => {
-  const lineColor = isActive ? 'bg-blue-700' : 'bg-steel-grey';
-  const borderColor = isActive ? 'border-blue-700' : 'border-steel-grey';
-  const accentColor = isActive ? 'bg-blue-600' : 'bg-blue-400';
+  const lineColor = isActive ? 'bg-emerald-700' : 'bg-steel-grey';
+  const borderColor = isActive ? 'border-emerald-700' : 'border-steel-grey';
+  const accentColor = isActive ? 'bg-emerald-600' : 'bg-steel-grey';
 
   if (type === 'swiss-single') {
     // Single column thumbnail
@@ -205,7 +205,7 @@ export const TemplateThumbnail: React.FC<TemplateThumbnailProps> = ({ type, isAc
           {/* Right column (narrower). Active state uses a heavier full
               border instead of a left stripe (impeccable BAN 1). */}
           <div
-            className={`w-1/3 border ${isActive ? 'border-blue-600' : 'border-blue-300'} pl-1 space-y-0.5`}
+            className={`w-1/3 border ${isActive ? 'border-emerald-600' : 'border-steel-grey'} pl-1 space-y-0.5`}
           >
             <div className={`h-0.5 ${accentColor} w-full`}></div>
             <div className={`h-0.5 ${lineColor} w-4/5 opacity-50`}></div>

@@ -98,7 +98,7 @@ export const ConfirmDialog: React.FC<ConfirmDialogProps> = ({
     },
     default: {
       icon: (
-        <div className="flex h-11 w-11 shrink-0 items-center justify-center rounded-full bg-indigo-50 text-primary">
+        <div className="flex h-11 w-11 shrink-0 items-center justify-center rounded-full bg-emerald-50 text-primary">
           <HelpCircle className="h-5 w-5" />
         </div>
       ),

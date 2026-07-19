@@ -76,10 +76,10 @@ export function PageContainer({
             }}
           >
             {/* Corner markers */}
-            <div className="absolute -top-1 -left-1 w-2 h-2 border-t border-l border-blue-500" />
-            <div className="absolute -top-1 -right-1 w-2 h-2 border-t border-r border-blue-500" />
-            <div className="absolute -bottom-1 -left-1 w-2 h-2 border-b border-l border-blue-500" />
-            <div className="absolute -bottom-1 -right-1 w-2 h-2 border-b border-r border-blue-500" />
+            <div className="absolute -top-1 -left-1 w-2 h-2 border-t border-l border-emerald-500" />
+            <div className="absolute -top-1 -right-1 w-2 h-2 border-t border-r border-emerald-500" />
+            <div className="absolute -bottom-1 -left-1 w-2 h-2 border-b border-l border-emerald-500" />
+            <div className="absolute -bottom-1 -right-1 w-2 h-2 border-b border-r border-emerald-500" />
           </div>
         )}
 

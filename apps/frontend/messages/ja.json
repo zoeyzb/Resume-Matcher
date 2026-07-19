@@ -33,8 +33,8 @@
     "popupBlocked": "ポップアップがブロックされました。ポップアップを許可するか、次のURLを手動で開いてください: {url}"
   },
   "home": {
-    "brandLine1": "履歴書",
-    "brandLine2": "マッチャー",
+    "brandLine1": "Next",
+    "brandLine2": "Role",
     "docs": "利用ドキュメント",
     "launchApp": "アプリを起動"
   },
@@ -348,7 +348,7 @@
           "website": "Webサイト"
         },
         "placeholders": {
-          "projectName": "Resume Matcher",
+          "projectName": "NextRole",
           "role": "作成者",
           "years": "2023年3月",
           "github": "github.com/username/project",
@@ -941,7 +941,7 @@
       "upload": {
         "kicker": "既存ファイル",
         "title": "履歴書をアップロード",
-        "description": "PDF、DOC、DOCX ファイルから始め、Resume Matcher にマスタープロフィールへ解析させます。",
+        "description": "PDF、DOC、DOCX ファイルから始め、NextRole にマスタープロフィールへ解析させます。",
         "action": "履歴書をアップロード"
       },
       "wizard": {

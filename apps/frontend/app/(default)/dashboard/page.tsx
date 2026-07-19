@@ -240,7 +240,7 @@ export default function DashboardPage() {
   };
 
   const cardPalette = [
-    'bg-indigo-500',
+    'bg-emerald-500',
     'bg-emerald-500',
     'bg-amber-500',
     'bg-sky-500',
@@ -360,7 +360,7 @@ export default function DashboardPage() {
               className="flex-row items-center gap-4 sm:flex"
               onClick={() => router.push(`/resumes/${masterResumeId}`)}
             >
-              <div className="flex h-12 w-12 shrink-0 items-center justify-center rounded-xl bg-indigo-50 text-primary">
+              <div className="flex h-12 w-12 shrink-0 items-center justify-center rounded-xl bg-emerald-50 text-primary">
                 <FileText className="h-6 w-6" />
               </div>
               <div className="mt-4 min-w-0 flex-1 sm:mt-0">
@@ -497,7 +497,7 @@ export default function DashboardPage() {
                 aria-disabled={!isTailorEnabled}
               >
                 <div>
-                  <div className="mx-auto flex h-10 w-10 items-center justify-center rounded-full bg-indigo-50 text-primary">
+                  <div className="mx-auto flex h-10 w-10 items-center justify-center rounded-full bg-emerald-50 text-primary">
                     <Plus className="h-5 w-5" />
                   </div>
                   <p className="mt-3 text-sm font-medium text-ink-soft">

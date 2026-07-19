@@ -300,13 +300,13 @@ export default function ResumeViewerPage() {
         <div className="min-h-screen flex flex-col items-center justify-center bg-background p-4">
           <div
             className={`rounded-2xl p-6 text-center max-w-md ${
-              isProcessing ? 'bg-indigo-50' : isFailed ? 'bg-amber-50' : 'bg-red-50'
+              isProcessing ? 'bg-emerald-50' : isFailed ? 'bg-amber-50' : 'bg-red-50'
             }`}
           >
             <div className="flex justify-center mb-4">
               <div
                 className={`flex h-12 w-12 items-center justify-center rounded-full ${
-                  isProcessing ? 'bg-indigo-100' : isFailed ? 'bg-amber-100' : 'bg-red-100'
+                  isProcessing ? 'bg-emerald-100' : isFailed ? 'bg-amber-100' : 'bg-red-100'
                 }`}
               >
                 {isProcessing ? (

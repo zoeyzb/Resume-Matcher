@@ -5,12 +5,12 @@ import { cn } from '@/lib/utils';
  * Premium product button.
  *
  * Rounded corners, soft layered shadow, subtle press feedback. One primary
- * (indigo) action per region; everything else demotes to outline/ghost.
+ * (emerald) action per region; everything else demotes to outline/ghost.
  */
 
 export interface ButtonProps extends React.ButtonHTMLAttributes<HTMLButtonElement> {
   /**
-   * - `default`: Indigo — primary actions (save, submit, create)
+   * - `default`: Emerald — primary actions (save, submit, create)
    * - `destructive`: Red — destructive actions (delete, remove)
    * - `success`: Emerald — positive actions (download, confirm, complete)
    * - `warning`: Amber — caution actions (reset, clear, undo)

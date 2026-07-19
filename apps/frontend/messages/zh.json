@@ -33,8 +33,8 @@
     "popupBlocked": "弹窗被阻止。请允许弹窗或手动打开此链接：{url}"
   },
   "home": {
-    "brandLine1": "简历",
-    "brandLine2": "匹配器",
+    "brandLine1": "Next",
+    "brandLine2": "Role",
     "docs": "使用文档",
     "launchApp": "启动应用"
   },
@@ -348,7 +348,7 @@
           "website": "网站"
         },
         "placeholders": {
-          "projectName": "Resume Matcher",
+          "projectName": "NextRole",
           "role": "作者",
           "years": "2023年3月",
           "github": "github.com/username/project",
@@ -941,7 +941,7 @@
       "upload": {
         "kicker": "现有文件",
         "title": "上传简历",
-        "description": "从 PDF、DOC 或 DOCX 文件开始，让 Resume Matcher 将其解析为你的主档案。",
+        "description": "从 PDF、DOC 或 DOCX 文件开始，让 NextRole 将其解析为你的主档案。",
         "action": "上传简历"
       },
       "wizard": {

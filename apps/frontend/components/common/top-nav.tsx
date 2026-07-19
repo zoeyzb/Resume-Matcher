@@ -67,7 +67,7 @@ export function TopNav() {
             aria-hidden="true"
           />
           <span className="sr-only sm:not-sr-only text-[15px] font-bold tracking-tight text-ink">
-            Resume Matcher
+            NextRole
           </span>
         </Link>
 

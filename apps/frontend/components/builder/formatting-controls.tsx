@@ -190,7 +190,7 @@ export const FormattingControls: React.FC<FormattingControlsProps> = ({ settings
                   onClick={() => handleTemplateChange(template.id)}
                   className={`group flex cursor-pointer flex-col items-center rounded-lg border p-2 transition-colors duration-150 motion-reduce:transition-none ${
                     settings.template === template.id
-                      ? 'border-primary bg-indigo-50/50 ring-2 ring-primary/20'
+                      ? 'border-primary bg-emerald-50/50 ring-2 ring-primary/20'
                       : 'border-border bg-white hover:bg-paper-tint'
                   }`}
                   title={templateLabels[template.id].description}
@@ -228,7 +228,7 @@ export const FormattingControls: React.FC<FormattingControlsProps> = ({ settings
                     onClick={() => handleAccentColorChange(color)}
                     className={`flex cursor-pointer items-center gap-2 rounded-lg border px-3 py-2 text-xs transition-colors duration-150 motion-reduce:transition-none ${
                       settings.accentColor === color
-                        ? 'border-primary bg-indigo-50/50 ring-2 ring-primary/20'
+                        ? 'border-primary bg-emerald-50/50 ring-2 ring-primary/20'
                         : 'border-border bg-white hover:bg-paper-tint'
                     }`}
                     title={t(`builder.formatting.accentColors.${color}`)}
@@ -256,7 +256,7 @@ export const FormattingControls: React.FC<FormattingControlsProps> = ({ settings
                   onClick={() => handlePageSizeChange(size)}
                   className={`flex-1 cursor-pointer rounded-lg border px-3 py-2 text-xs transition-colors duration-150 motion-reduce:transition-none ${
                     settings.pageSize === size
-                      ? 'border-primary bg-indigo-50/50 text-primary ring-2 ring-primary/20'
+                      ? 'border-primary bg-emerald-50/50 text-primary ring-2 ring-primary/20'
                       : 'border-border bg-white text-ink-soft hover:bg-paper-tint'
                   }`}
                   title={PAGE_SIZE_INFO[size].dimensions}

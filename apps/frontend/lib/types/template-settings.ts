@@ -65,7 +65,7 @@ export const DEFAULT_TEMPLATE_SETTINGS: TemplateSettings = {
   fontSize: { base: 3, headerScale: 3, headerFont: 'serif', bodyFont: 'sans-serif' },
   compactMode: false,
   showContactIcons: false,
-  accentColor: 'blue',
+  accentColor: 'green',
 };
 
 /**

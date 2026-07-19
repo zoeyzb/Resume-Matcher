@@ -210,7 +210,7 @@ export const GenericItemForm: React.FC<GenericItemFormProps> = ({
                   variant="ghost"
                   size="sm"
                   onClick={() => handleAddDescription(item.id)}
-                  className="h-7 text-xs text-primary hover:bg-indigo-50 hover:text-primary"
+                  className="h-7 text-xs text-primary hover:bg-emerald-50 hover:text-primary"
                 >
                   <Plus className="w-3 h-3" /> {t('builder.genericItemForm.actions.addPoint')}
                 </Button>

@@ -47,7 +47,7 @@ export function KanbanColumn({
           ref={setNodeRef}
           className={cn(
             'flex min-h-0 flex-1 flex-col gap-2 overflow-y-auto rounded-xl p-1 transition-colors duration-150 motion-reduce:transition-none',
-            isOver && 'bg-indigo-50/60'
+            isOver && 'bg-emerald-50/60'
           )}
         >
           {applications.length === 0 ? (

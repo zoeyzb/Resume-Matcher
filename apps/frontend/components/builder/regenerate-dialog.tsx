@@ -233,7 +233,7 @@ const ItemRow: React.FC<ItemRowProps> = ({ item, isSelected, onToggle }) => {
       onClick={onToggle}
       className={cn(
         'flex w-full cursor-pointer items-center gap-4 p-4 text-left transition-colors duration-150 motion-reduce:transition-none',
-        isSelected ? 'bg-indigo-50/60' : 'bg-white hover:bg-paper-tint'
+        isSelected ? 'bg-emerald-50/60' : 'bg-white hover:bg-paper-tint'
       )}
     >
       {/* Checkbox */}

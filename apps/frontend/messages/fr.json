@@ -33,8 +33,8 @@
     "popupBlocked": "Fenêtre contextuelle bloquée. Veuillez autoriser les fenêtres contextuelles ou ouvrir cette URL manuellement : {url}"
   },
   "home": {
-    "brandLine1": "Resume",
-    "brandLine2": "Matcher",
+    "brandLine1": "Next",
+    "brandLine2": "Role",
     "docs": "Documentation",
     "launchApp": "Lancer l'application"
   },
@@ -348,7 +348,7 @@
           "website": "Site web"
         },
         "placeholders": {
-          "projectName": "Resume Matcher",
+          "projectName": "NextRole",
           "role": "Créateur",
           "years": "Mars 2023",
           "github": "github.com/utilisateur/projet",
@@ -941,7 +941,7 @@
       "upload": {
         "kicker": "Fichier existant",
         "title": "Téléverser un CV",
-        "description": "Commencez avec un fichier PDF, DOC ou DOCX et laissez Resume Matcher l'analyser dans votre profil principal.",
+        "description": "Commencez avec un fichier PDF, DOC ou DOCX et laissez NextRole l'analyser dans votre profil principal.",
         "action": "Téléverser un CV"
       },
       "wizard": {

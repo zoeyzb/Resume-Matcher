@@ -25,7 +25,7 @@ interface ResumeVividProps {
  * Colorful two-column layout in the "Awesome-CV" lineage: a two-tone accent name,
  * a monospace title + contact row with circular icon chips, accent small-caps section
  * headers, and accent arrow (➜) bullet markers. Reads the accent-color control
- * (default blue). ATS-safe (all text is real DOM nodes).
+ * (default green). ATS-safe (all text is real DOM nodes).
  *
  * Main Column (63%): Summary, Experience, Projects, Certifications/Training, Custom Sections
  * Sidebar (37%): Skills, Languages, Education, Awards, Links

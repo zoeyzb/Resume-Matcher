@@ -33,8 +33,8 @@
     "popupBlocked": "Popup bloqueado. Por favor, permita popups ou abra esta URL manualmente: {url}"
   },
   "home": {
-    "brandLine1": "Resume",
-    "brandLine2": "Matcher",
+    "brandLine1": "Next",
+    "brandLine2": "Role",
     "docs": "Documentação",
     "launchApp": "Abrir App"
   },
@@ -348,7 +348,7 @@
           "website": "Website"
         },
         "placeholders": {
-          "projectName": "Resume Matcher",
+          "projectName": "NextRole",
           "role": "Criador",
           "years": "Mar 2023",
           "github": "github.com/usuario/projeto",
@@ -941,7 +941,7 @@
       "upload": {
         "kicker": "Arquivo existente",
         "title": "Enviar um currículo",
-        "description": "Comece com um arquivo PDF, DOC ou DOCX e deixe o Resume Matcher convertê-lo no seu perfil mestre.",
+        "description": "Comece com um arquivo PDF, DOC ou DOCX e deixe o NextRole convertê-lo no seu perfil mestre.",
         "action": "Enviar currículo"
       },
       "wizard": {

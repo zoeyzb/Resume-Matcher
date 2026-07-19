@@ -205,7 +205,7 @@ export function ResumeUploadDialog({
           <div
             className={`
                             relative rounded-xl border-2 border-dashed p-8 text-center transition-colors duration-150 motion-reduce:transition-none
-                            ${isDragging ? 'border-primary bg-indigo-50/50' : 'border-slate-200 hover:border-slate-300 hover:bg-paper-tint/40'}
+                            ${isDragging ? 'border-primary bg-emerald-50/50' : 'border-slate-200 hover:border-slate-300 hover:bg-paper-tint/40'}
                             ${currentFile ? 'bg-white border-solid border-border' : ''}
                             ${!currentFile && !isRetryingProcessing ? 'cursor-pointer' : 'cursor-default'}
                             ${isRetryingProcessing ? 'opacity-70' : ''}
@@ -226,7 +226,7 @@ export function ResumeUploadDialog({
             ) : currentFile ? (
               <div className="flex items-center justify-between gap-4">
                 <div className="flex items-center gap-3 text-left overflow-hidden">
-                  <div className="w-10 h-10 rounded-lg bg-indigo-50 flex items-center justify-center shrink-0">
+                  <div className="w-10 h-10 rounded-lg bg-emerald-50 flex items-center justify-center shrink-0">
                     <FileIcon className="w-5 h-5 text-primary" />
                   </div>
                   <div className="min-w-0">
@@ -253,7 +253,7 @@ export function ResumeUploadDialog({
               </div>
             ) : (
               <div className="flex flex-col items-center py-4">
-                <div className="w-12 h-12 rounded-full bg-indigo-50 flex items-center justify-center mb-4">
+                <div className="w-12 h-12 rounded-full bg-emerald-50 flex items-center justify-center mb-4">
                   <UploadIcon className="w-5 h-5 text-primary" />
                 </div>
                 <p className="font-semibold text-base mb-1 text-ink">

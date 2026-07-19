@@ -69,7 +69,7 @@ export function GeneratePrompt({
         className
       )}
     >
-      <div className="mb-6 flex h-14 w-14 items-center justify-center rounded-full bg-indigo-50">
+      <div className="mb-6 flex h-14 w-14 items-center justify-center rounded-full bg-emerald-50">
         <Icon className="h-6 w-6 text-primary" />
       </div>
       <h3 className="mb-2 text-base font-semibold text-ink">

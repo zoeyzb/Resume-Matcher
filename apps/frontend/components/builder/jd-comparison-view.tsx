@@ -65,7 +65,7 @@ export function JDComparisonView({ jobDescription, resumeData }: JDComparisonVie
       <div className="flex items-center justify-between px-4 py-3 bg-white border-b border-paper-tint">
         <div className="flex items-center gap-4">
           <div className="flex items-center gap-2">
-            <Target className="w-4 h-4 text-blue-600" />
+            <Target className="w-4 h-4 text-emerald-600" />
             <span className="text-sm font-mono">
               {t('builder.jdMatch.stats.keywordsExtracted', { count: keywords.size })}
             </span>

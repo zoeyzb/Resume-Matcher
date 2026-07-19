@@ -42,7 +42,7 @@
   --color-sidebar-border: var(--sidebar-border);
   --color-sidebar-ring: var(--sidebar-ring);
 
-  /* Product brand tokens — premium neutral palette, single indigo accent.
+  /* Product brand tokens — premium neutral palette, single emerald accent.
      --color-primary/--color-destructive/--color-secondary/--color-background
      already exist above via the legacy var(--xxx) chain; these are the
      additional semantics referenced directly by components (bg-canvas,
@@ -59,10 +59,10 @@
   --color-warning: #d97706; /* amber-600 */
   --color-warning-tint: #fffbeb;
   --color-destructive-tint: #fef2f2;
-  --color-info-tint: #eff6ff;
+  --color-info-tint: #f5f3ff; /* violet-50 - distinct from brand emerald */
 
-  --color-primary-hover: #4338ca; /* indigo-700 */
-  --color-primary-tint: #eef2ff; /* indigo-50 */
+  --color-primary-hover: #065f46; /* emerald-800 */
+  --color-primary-tint: #ecfdf5; /* emerald-50 */
 
   /* Soft, layered shadows — never a hard offset. Kept under the original
      --shadow-sw-* names so every existing shadow-sw-* call site re-themes
@@ -104,7 +104,7 @@
   --popover: #ffffff;
   --popover-foreground: #0f172a;
 
-  --primary: #4f46e5; /* indigo-600 */
+  --primary: #047857; /* emerald-700 */
   --primary-foreground: #ffffff;
 
   --secondary: #f1f5f9; /* slate-100 */
@@ -113,17 +113,17 @@
   --muted: #f1f5f9;
   --muted-foreground: #64748b;
 
-  --accent: #eef2ff; /* indigo-50 */
-  --accent-foreground: #3730a3;
+  --accent: #ecfdf5; /* emerald-50 */
+  --accent-foreground: #047857;
 
   --destructive: #dc2626;
   --destructive-foreground: #ffffff;
 
   --border: #e2e8f0; /* slate-200 */
   --input: #ffffff;
-  --ring: #4f46e5;
+  --ring: #047857;
 
-  --chart-1: #4f46e5;
+  --chart-1: #047857;
   --chart-2: #059669;
   --chart-3: #d97706;
   --chart-4: #dc2626;
@@ -131,12 +131,12 @@
 
   --sidebar: #ffffff;
   --sidebar-foreground: #0f172a;
-  --sidebar-primary: #4f46e5;
+  --sidebar-primary: #047857;
   --sidebar-primary-foreground: #ffffff;
   --sidebar-accent: #f1f5f9;
   --sidebar-accent-foreground: #0f172a;
   --sidebar-border: #e2e8f0;
-  --sidebar-ring: #4f46e5;
+  --sidebar-ring: #047857;
 }
 
 /* Light theme only. */

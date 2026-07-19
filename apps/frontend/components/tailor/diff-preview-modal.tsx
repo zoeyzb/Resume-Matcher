@@ -340,7 +340,7 @@ function StatTile({ label, value, variant }: StatTileProps) {
     success: 'bg-emerald-50 text-emerald-700',
     warning: 'bg-amber-50 text-amber-700',
     danger: 'bg-red-50 text-red-700',
-    info: 'bg-indigo-50 text-primary',
+    info: 'bg-emerald-50 text-primary',
   };
 
   return (
@@ -393,7 +393,7 @@ function ChangeItem({ change }: ChangeItemProps) {
   const typeBackgrounds = {
     added: 'bg-emerald-50/60',
     removed: 'bg-red-50/60',
-    modified: 'bg-indigo-50/60',
+    modified: 'bg-emerald-50/60',
   };
 
   const typeGlyphColors = {

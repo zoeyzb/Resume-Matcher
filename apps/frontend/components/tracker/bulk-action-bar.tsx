@@ -29,7 +29,7 @@ export function BulkActionBar({ selectedCount, onMove, onDelete, onClear }: Bulk
   ];
 
   return (
-    <div className="flex flex-wrap items-center gap-3 rounded-xl border border-primary/20 bg-indigo-50/60 p-3">
+    <div className="flex flex-wrap items-center gap-3 rounded-xl border border-primary/20 bg-emerald-50/60 p-3">
       <span className="text-sm font-semibold text-ink">
         {t('tracker.bulk.selected', { count: String(selectedCount) })}
       </span>
