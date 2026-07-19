@@ -35,8 +35,24 @@
   "home": {
     "brandLine1": "Next",
     "brandLine2": "Role",
+    "eyebrow": "AI搭載キャリアツールキット",
+    "subtitle": "AIによる履歴書の最適化、ATSスコア判定、応募状況の管理をこれひとつで。",
     "docs": "利用ドキュメント",
-    "launchApp": "アプリを起動"
+    "launchApp": "アプリを起動",
+    "features": {
+      "tailor": {
+        "title": "数秒で最適化",
+        "description": "ワンクリックで求人情報に合わせて履歴書を調整します。"
+      },
+      "ats": {
+        "title": "ATSを突破",
+        "description": "不足している内容を正確に把握し、応募前に修正できます。"
+      },
+      "track": {
+        "title": "応募状況を一元管理",
+        "description": "調整済みの履歴書とその状況をひとつのパイプラインで管理します。"
+      }
+    }
   },
   "nav": {
     "dashboard": "ダッシュボード",

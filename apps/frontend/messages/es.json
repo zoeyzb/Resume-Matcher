@@ -35,8 +35,24 @@
   "home": {
     "brandLine1": "Next",
     "brandLine2": "Role",
+    "eyebrow": "Kit de carrera con IA",
+    "subtitle": "Adaptación de currículum, puntuación ATS y seguimiento de postulaciones con IA, todo en un solo lugar.",
     "docs": "Guía de uso",
-    "launchApp": "Iniciar app"
+    "launchApp": "Iniciar app",
+    "features": {
+      "tailor": {
+        "title": "Adapta en segundos",
+        "description": "Ajusta tu currículum a cualquier oferta de empleo con un clic."
+      },
+      "ats": {
+        "title": "Supera el ATS",
+        "description": "Descubre exactamente qué falta y corrígelo antes de postular."
+      },
+      "track": {
+        "title": "Rastrea cada postulación",
+        "description": "Mantén cada currículum adaptado y su estado en un solo lugar."
+      }
+    }
   },
   "nav": {
     "dashboard": "Panel",

@@ -35,8 +35,24 @@
   "home": {
     "brandLine1": "Next",
     "brandLine2": "Role",
+    "eyebrow": "AI 驱动的职业工具箱",
+    "subtitle": "AI 驱动的简历定制、ATS 评分与投递跟踪，一站搞定。",
     "docs": "使用文档",
-    "launchApp": "启动应用"
+    "launchApp": "启动应用",
+    "features": {
+      "tailor": {
+        "title": "秒级定制",
+        "description": "一键将简历匹配到任意职位描述。"
+      },
+      "ats": {
+        "title": "顺利通过 ATS",
+        "description": "准确看到缺失的内容，投递前及时修复。"
+      },
+      "track": {
+        "title": "跟踪每一次投递",
+        "description": "在一个流程中管理每份定制简历及其进度。"
+      }
+    }
   },
   "nav": {
     "dashboard": "仪表板",

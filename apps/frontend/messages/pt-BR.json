@@ -35,8 +35,24 @@
   "home": {
     "brandLine1": "Next",
     "brandLine2": "Role",
+    "eyebrow": "Kit de carreira com IA",
+    "subtitle": "Adaptação de currículo, pontuação ATS e acompanhamento de candidaturas com IA, tudo em um só lugar.",
     "docs": "Documentação",
-    "launchApp": "Abrir App"
+    "launchApp": "Abrir App",
+    "features": {
+      "tailor": {
+        "title": "Adapte em segundos",
+        "description": "Ajuste seu currículo a qualquer vaga com um clique."
+      },
+      "ats": {
+        "title": "Supere o ATS",
+        "description": "Veja exatamente o que está faltando e corrija antes de se candidatar."
+      },
+      "track": {
+        "title": "Acompanhe cada candidatura",
+        "description": "Mantenha cada currículo adaptado e seu status em um só lugar."
+      }
+    }
   },
   "nav": {
     "dashboard": "Painel",

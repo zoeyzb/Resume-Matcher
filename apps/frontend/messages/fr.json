@@ -35,8 +35,24 @@
   "home": {
     "brandLine1": "Next",
     "brandLine2": "Role",
+    "eyebrow": "Boîte à outils carrière propulsée par l'IA",
+    "subtitle": "Adaptation de CV, notation ATS et suivi des candidatures par IA, le tout au même endroit.",
     "docs": "Documentation",
-    "launchApp": "Lancer l'application"
+    "launchApp": "Lancer l'application",
+    "features": {
+      "tailor": {
+        "title": "Adaptez en quelques secondes",
+        "description": "Adaptez votre CV à n'importe quelle offre d'emploi en un clic."
+      },
+      "ats": {
+        "title": "Passez le cap de l'ATS",
+        "description": "Voyez exactement ce qui manque et corrigez-le avant de postuler."
+      },
+      "track": {
+        "title": "Suivez chaque candidature",
+        "description": "Gardez chaque CV adapté et son statut au même endroit."
+      }
+    }
   },
   "nav": {
     "dashboard": "Tableau de bord",

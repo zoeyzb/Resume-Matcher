@@ -64,6 +64,13 @@
   --color-primary-hover: #065f46; /* emerald-800 */
   --color-primary-tint: #ecfdf5; /* emerald-50 */
 
+  /* Secondary "premium" accent — warm gold, used sparingly for standout
+     moments (AI badges, highlighted plan/feature callouts) so the product
+     doesn't read as flat single-hue emerald everywhere. */
+  --color-gold: #a16207; /* amber-700, WCAG AA on white */
+  --color-gold-foreground: #ffffff;
+  --color-gold-tint: #fef9ec;
+
   /* Soft, layered shadows — never a hard offset. Kept under the original
      --shadow-sw-* names so every existing shadow-sw-* call site re-themes
      automatically without touching each component. */

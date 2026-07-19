@@ -35,8 +35,24 @@
   "home": {
     "brandLine1": "Next",
     "brandLine2": "Role",
+    "eyebrow": "AI-Powered Career Toolkit",
+    "subtitle": "AI-powered resume tailoring, ATS scoring, and application tracking — all in one place.",
     "docs": "Docs",
-    "launchApp": "Launch App"
+    "launchApp": "Launch App",
+    "features": {
+      "tailor": {
+        "title": "Tailor in seconds",
+        "description": "Match your resume to any job description with one click."
+      },
+      "ats": {
+        "title": "Beat the ATS",
+        "description": "See exactly what's missing and fix it before you apply."
+      },
+      "track": {
+        "title": "Track every application",
+        "description": "Keep every tailored resume and its status in one pipeline."
+      }
+    }
   },
   "nav": {
     "dashboard": "Dashboard",
